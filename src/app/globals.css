@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* ── komunitas design tokens ───────────────────────────────
+   Identity: a warm, civic treasury. Grape-violet primary on
+   warm stone paper, amber for moments of action/success.        */
+@theme {
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-dm-sans);
+
+  --color-brand-50: #f5f3ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-300: #c4b5fd;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+  --color-brand-800: #5b21b6;
+  --color-brand-900: #4c1d95;
+
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+
+  --color-paper: #faf8f5;
+  --color-ink: #1c1917;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  }
+  ::selection {
+    background-color: var(--color-brand-200);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  }
+  /* faint dotted civic backdrop */
+  .bg-civic {
+    background-color: var(--color-paper);
+    background-image: radial-gradient(rgba(124, 58, 237, 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+}
