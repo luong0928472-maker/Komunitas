@@ -31,6 +31,7 @@ const envSchema = z.object({
     .default('GAZ5PUFJVFTV6DRJJKP2CBSRBI56CRPCMNXOJFFYLUG26XAUOWHZEZ7G'),
   NEXT_PUBLIC_USDC_CODE: z.string().default('USDC'),
   SESSION_SECRET: z.string().min(32, 'SESSION_SECRET must be at least 32 chars'),
+  ADMIN_SECRET: z.string().min(32).optional(),
   SESSION_COOKIE_NAME: z.string().default('komunitas_session'),
   SESSION_TTL_SECONDS: z.coerce.number().int().positive().default(604800),
   NONCE_TTL_SECONDS: z.coerce.number().int().positive().default(300),

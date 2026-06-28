@@ -27,7 +27,7 @@ const submitCreateSchema = z.object({
   title: z.string().min(5).max(120),
   description: z.string().min(20).max(2000),
   requestStroops: stroopsSchema,
-  asset: z.enum(['XLM', 'USDC']).default('XLM'),
+  asset: z.enum(['XLM']).default('XLM'),
   recipientAddress: recipientSchema,
   votingDurationHours: z.number().int().positive().max(720).default(72),
 });

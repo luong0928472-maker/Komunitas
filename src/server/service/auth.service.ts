@@ -10,7 +10,7 @@ import {
   TransactionBuilder,
 } from '@stellar/stellar-sdk';
 import { db } from '@/server/db/client';
-import { authNonces, sessions } from '@/server/db/schema';
+import { authNonces, members, sessions } from '@/server/db/schema';
 import { env } from '@/server/config/env';
 import { getNetworkPassphrase } from '@/server/config/stellar';
 import { AppError } from '@/server/lib/http';
@@ -109,11 +109,16 @@ export const authService = {
       .where(eq(authNonces.nonce, nonce));
 
     const expiresAt = new Date(Date.now() + env.SESSION_TTL_SECONDS * 1000);
+    await db.delete(sessions).where(eq(sessions.publicKey, publicKey));
     const [session] = await db
       .insert(sessions)
       .values({ publicKey, expiresAt })
       .returning();
     if (!session) throw new AppError('INTERNAL', 'Failed to create session', 500);
+
+    await db.insert(members).values({ publicKey, nextMuxIndex: 0 }).onConflictDoNothing({
+      target: members.publicKey,
+    });
 
     return { sessionId: session.id };
   },

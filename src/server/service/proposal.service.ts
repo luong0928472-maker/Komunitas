@@ -70,9 +70,19 @@ export const proposalService = {
     },
   ) {
     const { hash: txHash, returnValue } = await submitSigned(signedXdr);
-    const onchainId = String(returnValue ?? '');
+    let onchainId = String(returnValue ?? '');
     if (!onchainId) {
-      throw new AppError('CONFLICT', 'The contract did not return a proposal id. Please retry.', 409);
+      onchainId = await this.resolveOrphanedProposalId(proposerPublicKey, txHash);
+      if (!onchainId) {
+        throw new AppError(
+          'CONFLICT',
+          'The contract did not return a proposal id. Please retry.',
+          409,
+        );
+      }
+      logger.warn(
+        `Proposal orphan-recovered by ${proposerPublicKey} tx ${txHash} onchainId=${onchainId}`,
+      );
     }
 
     const votingDeadline = new Date(Date.now() + meta.votingDurationHours * 3600 * 1000);
@@ -133,6 +143,12 @@ export const proposalService = {
     if (new Date() > proposal.votingDeadline) {
       throw new AppError('CONFLICT', 'The voting window has ended', 409);
     }
+    const onchain = (await readContract('get_proposal', u64(proposal.onchainId))) as {
+      status?: unknown;
+    };
+    if (mapStatus(onchain.status) !== 'active') {
+      throw new AppError('CONFLICT', 'Proposal is no longer active on-chain', 409);
+    }
     const [already] = await db
       .select()
       .from(votes)
@@ -173,7 +189,23 @@ export const proposalService = {
       .insert(votes)
       .values({ proposalId, voterPublicKey, inFavor, weightStroops, stellarTxHash: txHash });
 
-    // Read the authoritative on-chain tally + status.
+    const updated = await proposalService.reconcileProposal(proposalId, txHash);
+
+    logger.info(`Vote on ${proposalId} by ${voterPublicKey} tx ${txHash} → ${updated.status}`);
+    return updated;
+  },
+
+  /**
+   * Read the authoritative on-chain proposal and mirror it into the database:
+   * vote tallies, status, releaseTxHash on funding, and pool totalReleasedStroops.
+   * Reusable from vote submission and admin disburse reconciliation.
+   */
+  async reconcileProposal(proposalId: string, txHash?: string) {
+    const proposal = await proposalService.getById(proposalId);
+    if (!proposal.onchainId) {
+      throw new AppError('CONFLICT', 'This proposal is not on-chain yet.', 409);
+    }
+
     const onchain = (await readContract('get_proposal', u64(proposal.onchainId))) as {
       votes_yes?: bigint | number;
       votes_no?: bigint | number;
@@ -186,9 +218,7 @@ export const proposalService = {
 
     const update: Record<string, unknown> = { votesYes, votesNo, totalVoters, status };
     if (status === 'funded' && proposal.status !== 'funded') {
-      update.releaseTxHash = txHash;
       update.fundedAt = new Date();
-      // Mirror the released amount into the pool ledger.
       const [pool] = await db.select().from(fundPool).limit(1);
       if (pool) {
         await db
@@ -201,6 +231,7 @@ export const proposalService = {
           })
           .where(eq(fundPool.id, pool.id));
       }
+      update.releaseTxHash = txHash ?? null;
     }
 
     const [updated] = await db
@@ -209,7 +240,6 @@ export const proposalService = {
       .where(eq(proposals.id, proposalId))
       .returning();
 
-    logger.info(`Vote on ${proposalId} by ${voterPublicKey} tx ${txHash} → ${status}`);
     return updated!;
   },
 
@@ -225,5 +255,44 @@ export const proposalService = {
       totalContributedStroops: pool?.totalContributedStroops ?? '0',
       totalReleasedStroops: pool?.totalReleasedStroops ?? '0',
     };
+  },
+
+  /**
+   * Recover the on-chain id when the create_proposal return value could not be
+   * decoded but the tx settled on-chain. Tries get_proposal_count first (fast),
+   * then scans the most recent proposals backwards. Returns '' when nothing
+   * matches — caller throws a CONFLICT so the user can retry safely.
+   */
+  async resolveOrphanedProposalId(proposerPublicKey: string, txHash: string): Promise<string> {
+    try {
+      const count = (await readContract('get_proposal_count')) as bigint | number | null;
+      if (count !== null && count !== undefined) {
+        const last = BigInt(count);
+        if (last > 0n) {
+          const candidate = last.toString();
+          const onchain = (await readContract('get_proposal', u64(candidate))) as {
+            proposer?: string;
+            create_tx_hash?: string;
+            title?: string;
+          } | null;
+          if (onchain && (onchain.create_tx_hash === txHash || onchain.proposer === proposerPublicKey)) {
+            return candidate;
+          }
+        }
+      }
+    } catch (e) {
+      logger.warn(`resolveOrphanedProposalId: get_proposal_count failed: ${String(e)}`);
+    }
+
+    try {
+      const latest = await proposalService.list();
+      for (const row of latest) {
+        if (row.createTxHash === txHash && row.onchainId) return row.onchainId;
+      }
+    } catch (e) {
+      logger.warn(`resolveOrphanedProposalId: db list scan failed: ${String(e)}`);
+    }
+
+    return '';
   },
 };

@@ -1,4 +1,4 @@
-import { desc, eq } from 'drizzle-orm';
+import { desc, eq, sql } from 'drizzle-orm';
 import {
   type Asset,
   BASE_FEE,
@@ -62,41 +62,65 @@ export const fundService = {
     }
     const { hash: txHash } = await submitSigned(signedXdr);
 
-    const [existing] = await db
-      .select()
-      .from(members)
-      .where(eq(members.publicKey, publicKey))
-      .limit(1);
+    const [dep] = await db.transaction(async (tx) => {
+      const [existing] = await tx
+        .select()
+        .from(members)
+        .where(eq(members.publicKey, publicKey))
+        .limit(1);
 
-    if (existing) {
-      await db
-        .update(members)
-        .set({
-          contributedStroops: addBig(existing.contributedStroops, amountStroops),
+      if (existing) {
+        await tx
+          .update(members)
+          .set({
+            contributedStroops: addBig(existing.contributedStroops, amountStroops),
+            lastContributionAt: new Date(),
+          })
+          .where(eq(members.publicKey, publicKey));
+      } else {
+        await tx.insert(members).values({
+          publicKey,
+          contributedStroops: amountStroops,
           lastContributionAt: new Date(),
+        });
+      }
+
+      const [pool] = await tx.select().from(fundPool).limit(1);
+      let poolId: string;
+      if (pool) {
+        poolId = pool.id;
+      } else {
+        const [created] = await tx
+          .insert(fundPool)
+          .values({ treasuryAddress: getContractId() })
+          .returning();
+        poolId = created!.id;
+      }
+
+      const [sumRow] = await tx
+        .select({ total: sql<string>`COALESCE(SUM(${deposits.amountStroops}), '0')` })
+        .from(deposits);
+
+      await tx
+        .update(fundPool)
+        .set({
+          totalContributedStroops: addBig(sumRow?.total ?? '0', amountStroops),
+          updatedAt: new Date(),
         })
-        .where(eq(members.publicKey, publicKey));
-    } else {
-      await db.insert(members).values({
-        publicKey,
-        contributedStroops: amountStroops,
-        lastContributionAt: new Date(),
-      });
-    }
+        .where(eq(fundPool.id, poolId));
 
-    const pool = await fundService.getOrCreatePool();
-    await db
-      .update(fundPool)
-      .set({
-        totalContributedStroops: addBig(pool.totalContributedStroops, amountStroops),
-        updatedAt: new Date(),
-      })
-      .where(eq(fundPool.id, pool.id));
+      const [created] = await tx
+        .insert(deposits)
+        .values({
+          memberPublicKey: publicKey,
+          amountStroops,
+          assetCode: 'XLM',
+          stellarTxHash: txHash,
+        })
+        .returning();
 
-    const [dep] = await db
-      .insert(deposits)
-      .values({ memberPublicKey: publicKey, amountStroops, assetCode: 'XLM', stellarTxHash: txHash })
-      .returning();
+      return [created];
+    });
 
     logger.info(`Contribution ${amountStroops} XLM from ${publicKey} via contract tx ${txHash}`);
     return { txHash, amountStroops, assetCode: 'XLM' as const, deposit: dep };

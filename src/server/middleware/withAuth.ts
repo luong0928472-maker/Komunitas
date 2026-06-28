@@ -8,7 +8,7 @@ import type { Middleware } from './compose';
 export const withAuth: Middleware = (handler) => async (req, ctx) => {
   const sessionId = readSessionCookie(req);
   if (!sessionId) {
-    throw new AppError('UNAUTHORIZED', 'Missing session', 401);
+    throw new AppError('UNAUTHORIZED', 'Missing or invalid session', 401);
   }
   const [row] = await db.select().from(sessions).where(eq(sessions.id, sessionId)).limit(1);
   if (!row) {
