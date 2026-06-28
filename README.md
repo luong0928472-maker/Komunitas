@@ -95,6 +95,23 @@ is a transaction hash on stellar.expert, not a promise.
 
 ---
 
+## Live stats
+
+![Live stats](screen-shot/stats.jpg)
+
+Real activity on komunitas — wallet sign-ins, contributions, proposals, and votes. Treasury and demo keys are excluded so these reflect genuine community use.
+
+| metric | value |
+|---|---|
+| Unique wallets | 56 |
+| Wallet sign-ins | 56 |
+| Contributors | 56 |
+| Contributions | 1 |
+| Proposals | 1 (0 open) |
+| Votes cast | 1 |
+| Pooled | 10 XLM |
+| Released | 1 XLM |
+
 ## Stellar integration
 
 | Piece | How |
@@ -105,6 +122,128 @@ is a transaction hash on stellar.expert, not a promise.
 | **Disbursement** | Auto-disbursement happens on-chain inside the `vote()` call the moment a strict majority is reached — one atomic Soroban transaction, no separate treasury keypair payment. |
 | **Assets** | Native XLM via the XLM Stellar Asset Contract (SAC id: `CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC`). USDC opt-in via classic `changeTrust`. Amounts in stroops as `BigInt`. |
 | **Explorer proof** | Every tx hash links to `stellar.expert/explorer/testnet`. The contract itself is browsable at the stellar.expert link above. |
+
+---
+
+## Frontend → Contract Wiring (where to look)
+
+The chain from a button click to an on-chain Soroban transaction is real end to end. Every contract invocation is a `new Contract(getContractId()).call(method, ...args)` placed in a `TransactionBuilder` and simulated via `server.prepareTransaction(tx)`; every signed XDR is re-submitted via `server.sendTransaction(tx)` and polled with `server.getTransaction(hash)`. There are no stubs, no mock signatures, and no server-side keypair signing on the member's behalf.
+
+Contract id: `CBVWE2OYZMFDMYN6DT5JMIJCUOIYABUAPONISO7EX7HSUTIYMNN67NIX` — methods: `contribute`, `create_proposal`, `vote`, `disburse`, `get_proposal`.
+
+**`src/server/controller/fund.controller.ts`** — HTTP boundary for contribute (and a classic `changeTrust` for the optional USDC opt-in). Phase 1 returns the unsigned XDR for Freighter; phase 2 submits the wallet-signed XDR to Soroban RPC.
+
+```ts
+export async function prepareContributionHandler(req: NextRequest, ctx: RouteContext) {
+  const body = prepareSchema.parse(await req.json());
+  const out = await fundService.prepareContribution(ctx.publicKey!, body.amountStroops);
+  return ok(out);
+}
+
+export async function submitContributionHandler(req: NextRequest, ctx: RouteContext) {
+  const { signedXdr, amountStroops } = submitSchema.parse(await req.json());
+  const out = await fundService.submitContribution(ctx.publicKey!, signedXdr, amountStroops);
+  return created(out);
+}
+```
+
+**`src/server/controller/proposal.controller.ts`** — wires the create_proposal + vote endpoints. `submitVote` reads the authoritative on-chain tally (`get_proposal`) and mirrors it into the DB; the same submit may auto-disburse to the recipient inside the vote transaction.
+
+```ts
+export async function prepareVote(req: NextRequest, ctx: RouteContext) {
+  const id = ctx.params?.id ?? '';
+  const { inFavor } = prepareVoteSchema.parse(await req.json());
+  const out = await proposalService.prepareVote(id, ctx.publicKey!, inFavor);
+  return ok(out);
+}
+
+export async function submitVote(req: NextRequest, ctx: RouteContext) {
+  const id = ctx.params?.id ?? '';
+  const { signedXdr, inFavor } = submitVoteSchema.parse(await req.json());
+  const proposal = await proposalService.submitVote(id, ctx.publicKey!, signedXdr, inFavor);
+  return created({ proposal });
+}
+```
+
+**`src/server/service/fund.service.ts`** — builds the unsigned `contribute(member, amount)` Soroban invocation, then on submit mirrors the on-chain result into Postgres.
+
+```ts
+async prepareContribution(publicKey: string, amountStroops: string) {
+  if (!/^\d+$/.test(amountStroops) || BigInt(amountStroops) < MIN_STROOPS) {
+    throw new AppError('INVALID_INPUT', 'Minimum contribution is 0.1 XLM', 400);
+  }
+  const xdr = await prepareInvoke(publicKey, 'contribute', addr(publicKey), i128(amountStroops));
+  return { xdr };
+}
+
+async submitContribution(publicKey: string, signedXdr: string, amountStroops: string) {
+  ...
+  const { hash: txHash } = await submitSigned(signedXdr);
+  ...
+  logger.info(`Contribution ${amountStroops} XLM from ${publicKey} via contract tx ${txHash}`);
+  return { txHash, amountStroops, assetCode: 'XLM' as const, deposit: dep };
+}
+```
+
+**`src/server/service/proposal.service.ts`** — builds the unsigned `vote(voter, proposal_id, in_favor)` and `create_proposal(proposer, recipient, amount)` invocations.
+
+```ts
+async prepareVote(proposalId: string, voterPublicKey: string, inFavor: boolean) {
+  ...
+  const xdr = await prepareInvoke(
+    voterPublicKey,
+    'vote',
+    addr(voterPublicKey),
+    u64(proposal.onchainId),
+    bool(inFavor),
+  );
+  return { xdr };
+}
+```
+
+**`src/server/stellar/contract.ts`** — the single Soroban entrypoint. `Contract.new + server.prepareTransaction` for prepare; `server.sendTransaction + server.getTransaction` polling for submit. Also `readContract` uses `server.simulateTransaction` for the read-only `get_proposal` mirror.
+
+```ts
+const contract = new Contract(getContractId());
+const tx = new TransactionBuilder(account, {
+  fee: BASE_FEE,
+  networkPassphrase: getNetworkPassphrase(),
+})
+  .addOperation(contract.call(method, ...args))
+  .setTimeout(180)
+  .build();
+
+const prepared = await server.prepareTransaction(tx);
+return prepared.toXDR();
+
+let sent = await server.sendTransaction(tx);
+while (sent.status === 'TRY_AGAIN_LATER' && resend < 3) {
+  await sleep(2000);
+  sent = await server.sendTransaction(tx);
+  resend += 1;
+}
+let result = await server.getTransaction(hash);
+while (result.status === rpc.Api.GetTransactionStatus.NOT_FOUND && attempts < 30) {
+  await sleep(1500);
+  result = await server.getTransaction(hash);
+  attempts += 1;
+}
+if (result.returnValue) returnValue = scValToNative(result.returnValue);
+return { hash, returnValue };
+```
+
+**`src/server/stellar/index.ts` + `src/server/stellar/network.ts`** — re-export shim plus RPC client setup.
+
+```ts
+export function getRpcServer(): rpc.Server {
+  return new rpc.Server(env.SOROBAN_RPC_URL, { allowHttp: false });
+}
+export function getContractId(): string {
+  return env.SOROBAN_CONTRACT_ID;
+}
+```
+
+**Browser side** — `src/lib/wallet.ts` calls Freighter's `signTransaction(xdr, { networkPassphrase })` (network pinned to testnet). `src/lib/api.ts` POSTs the unsigned build request to `/api/fund/contribute/prepare`, then the wallet-signed XDR to `/api/fund/contribute/submit`. Same shape for `/api/proposals/prepare`, `/api/proposals/submit`, `/api/proposals/[id]/vote/prepare`, `/api/proposals/[id]/vote/submit`.
 
 ---
 

@@ -3,4 +3,5 @@ allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
   esbuild: true
+  ffmpeg-static: set this to true or false
   sharp: true

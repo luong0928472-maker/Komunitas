@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const members = pgTable('members', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -7,6 +7,7 @@ export const members = pgTable('members', {
   contributedStroops: text('contributed_stroops').notNull().default('0'),
   joinedAt: timestamp('joined_at', { withTimezone: true }).defaultNow().notNull(),
   lastContributionAt: timestamp('last_contribution_at', { withTimezone: true }),
+  nextMuxIndex: integer('next_mux_index').notNull().default(0),
 });
 
 export type Member = typeof members.$inferSelect;

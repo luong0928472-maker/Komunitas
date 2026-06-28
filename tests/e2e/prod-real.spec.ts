@@ -140,12 +140,16 @@ test('real Freighter: connect (SEP-10) + on-chain contribute -> real tx hash', a
   await expect(page.getByRole('heading', { name: /contribution confirmed/i })).toBeVisible({
     timeout: 120_000,
   });
-  const txLink = page.locator('a[href*="stellar.expert"]').first();
-  await expect(txLink).toBeVisible({ timeout: 30_000 });
-  const txHref = await txLink.getAttribute('href');
-  expect(txHref).toMatch(/stellar\.expert\/explorer\/testnet\/tx\/[0-9a-f]{64}/);
   await page.waitForTimeout(1000);
   await shot(page, '06-success.jpg');
+
+  const txLink = page.locator('a[href*="stellar.expert"]').first();
+  await expect(txLink).toBeVisible({ timeout: 30_000 });
+  await txLink.scrollIntoViewIfNeeded().catch(() => {});
+  const txHref = await txLink.getAttribute('href');
+  expect(txHref).toMatch(/stellar\.expert\/explorer\/testnet\/tx\/[0-9a-f]{64}/);
+  await page.waitForTimeout(800);
+  await shot(page, '09-contract-tx.jpg');
 
   await page.goto(`${BASE_URL}/stats`, { waitUntil: 'domcontentloaded' });
   await expect(page.getByRole('heading', { name: /live interaction stats/i })).toBeVisible({
@@ -155,7 +159,6 @@ test('real Freighter: connect (SEP-10) + on-chain contribute -> real tx hash', a
 
   const txHash = (txHref ?? '').split('/tx/')[1];
   expect(txHash).toBeTruthy();
-  // biome-ignore lint/suspicious/noConsole: surface the real tx hash for the run report
   console.log('CORE_FLOW_TX=' + txHash);
 });
 

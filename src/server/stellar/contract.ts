@@ -129,7 +129,8 @@ export async function submitSigned(signedXdr: string): Promise<SubmitResult> {
   if (result.returnValue) {
     try {
       returnValue = scValToNative(result.returnValue);
-    } catch {
+    } catch (e) {
+      console.error('[scVal decode]', e);
       returnValue = null;
     }
   }
@@ -144,8 +145,21 @@ export async function submitSigned(signedXdr: string): Promise<SubmitResult> {
  */
 export async function readContract(method: string, ...args: xdr.ScVal[]): Promise<unknown> {
   const server = getRpcServer();
-  const account = await server.getAccount(getTreasuryAddress());
   const contract = new Contract(getContractId());
+
+  let account: Awaited<ReturnType<typeof server.getAccount>>;
+  try {
+    account = await server.getAccount(getTreasuryAddress());
+  } catch (e) {
+    console.error(`readContract(${method}): treasury unfunded, falling back`, e);
+    try {
+      account = await server.getAccount(getContractId());
+    } catch (e2) {
+      console.error(`readContract(${method}): contract fallback also failed`, e2);
+      throw new AppError('CONFLICT', `Contract read failed: source account unavailable`, 409);
+    }
+  }
+
   const tx = new TransactionBuilder(account, {
     fee: BASE_FEE,
     networkPassphrase: getNetworkPassphrase(),
