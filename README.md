@@ -74,7 +74,11 @@ is a transaction hash on stellar.expert, not a promise.
    the transaction hash.
 
 ---
+## Demo & Pitch Deck
 
+- **Demo Video:** [Watch Demo](https://drive.google.com/file/d/1hJnOvXjXLHOx3pHYqwo4o72ZqWagfODx/view?usp=drive_link)
+- **Pitch Deck:** [View Pitch Deck](https://drive.google.com/file/d/1qfbuUtlUu1MxNGZtaaDIRboVy-4J4-uo/view?usp=drive_link)
+---
 ## What makes it real
 
 - **Real deployed Soroban smart contract.** All contributions, proposals, votes, and
