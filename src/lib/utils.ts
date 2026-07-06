@@ -41,6 +41,7 @@ export function votePercentage(yes: string, total: string): number {
   return Math.round((Number(yes) / t) * 100);
 }
 
-export const EXPLORER = 'https://stellar.expert/explorer/testnet';
+export const NETWORK = process.env.NEXT_PUBLIC_STELLAR_NETWORK ?? 'testnet';
+export const EXPLORER = `https://stellar.expert/explorer/${NETWORK === 'public' ? 'public' : 'testnet'}`;
 export const txUrl = (hash: string) => `${EXPLORER}/tx/${hash}`;
 export const accountUrl = (key: string) => `${EXPLORER}/account/${key}`;

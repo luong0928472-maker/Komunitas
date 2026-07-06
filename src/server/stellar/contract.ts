@@ -18,6 +18,7 @@ import {
 } from './network';
 import { AppError } from '@/server/lib/http';
 import { logger } from '@/server/lib/logger';
+import { env } from '@/server/config/env';
 
 // --- ScVal argument helpers ------------------------------------------------
 
@@ -224,7 +225,9 @@ async function getFreshAccount(publicKey: string): Promise<Account> {
   if (best === null) {
     throw new AppError(
       'INVALID_INPUT',
-      'Your wallet is not funded on testnet yet. Fund it with the Friendbot, then try again.',
+      env.STELLAR_NETWORK === 'public'
+        ? 'Your wallet does not exist on mainnet yet. Send at least 1 XLM to it to activate it, then try again.'
+        : 'Your wallet is not funded on testnet yet. Fund it with the Friendbot, then try again.',
       400,
     );
   }

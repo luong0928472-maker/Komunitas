@@ -1,4 +1,50 @@
-# Komunitas Fund — Testnet deployment record
+# Komunitas Fund — Deployment records
+
+## Mainnet (live)
+
+Deployed 2026-07-06 from identity `komunitas-main`.
+
+| Item | Value |
+|---|---|
+| **Contract ID** | `CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR` |
+| Wasm hash | `ecba0ffceff42d43fc451ce9670de5252afd805755563c0f9f1908f115909eaa` |
+| Admin (deployer) | `GATMFFV76CQM6JAB5DC4RBSSVOK6RIBYI5IISJWMUYZ2BRVVFR6LLWOD` |
+| Token (native XLM SAC) | `CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA` |
+| Network | Public Global Stellar Network ; September 2015 |
+| RPC | https://soroban-rpc.mainnet.stellar.gateway.fm (alt: https://mainnet.sorobanrpc.com) |
+| Wasm size | 18,425 bytes (optimized) |
+
+Explorer: https://stellar.expert/explorer/public/contract/CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR
+
+### On-chain proof
+
+| Step | Tx | Fee |
+|---|---|---|
+| Upload wasm | [`ad417560…`](https://stellar.expert/explorer/public/tx/ad417560) | 22.511 XLM |
+| Deploy (instantiate) | [`71b46304…`](https://stellar.expert/explorer/public/tx/71b46304648af38597a32ce0c1aac99292bbed09789b258dd96b4f791880dd0c) | 0.018 XLM |
+| `initialize(admin, token)` | [`29382d18…`](https://stellar.expert/explorer/public/tx/29382d187d96692967761ed47d9e1e62a3b737af18d5acfc533d928bb5d2c3d5) | 0.064 XLM |
+
+Verified after init: `get_admin()` = deployer, `get_token()` = native XLM SAC,
+`total_contributed()` = 0, `is_paused()` = false. Total deploy cost: **22.59 XLM**.
+
+### Production env (Vercel / .env.production)
+
+```bash
+STELLAR_NETWORK=public
+STELLAR_HORIZON_URL=https://horizon.stellar.org
+STELLAR_NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015"
+SOROBAN_RPC_URL=https://soroban-rpc.mainnet.stellar.gateway.fm
+SOROBAN_CONTRACT_ID=CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR
+NEXT_PUBLIC_SOROBAN_CONTRACT_ID=CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR
+XLM_SAC_CONTRACT_ID=CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA
+NEXT_PUBLIC_STELLAR_NETWORK=public
+TREASURY_ADDRESS=GATMFFV76CQM6JAB5DC4RBSSVOK6RIBYI5IISJWMUYZ2BRVVFR6LLWOD
+```
+
+Note: `upgrade(wasm_hash)` re-uploads a new wasm — budget another ~23 XLM for any
+future upgrade. Run all tests/demos on testnet; mainnet transactions cost real XLM.
+
+## Testnet deployment record
 
 Live, verified deployment of the `komunitas-fund` Soroban contract on **Stellar Testnet**.
 This contract is the on-chain core of the Komunitas app: members contribute XLM, open

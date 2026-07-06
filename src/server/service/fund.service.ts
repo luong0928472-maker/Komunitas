@@ -20,6 +20,7 @@ import {
 } from '@/server/stellar';
 import { AppError } from '@/server/lib/http';
 import { logger } from '@/server/lib/logger';
+import { env } from '@/server/config/env';
 
 const MIN_STROOPS = 1_000_000n; // 0.1 XLM
 
@@ -135,7 +136,9 @@ export const fundService = {
     } catch {
       throw new AppError(
         'INVALID_INPUT',
-        'Your wallet is not funded on testnet yet. Fund it with the Friendbot first.',
+        env.STELLAR_NETWORK === 'public'
+          ? 'Your wallet does not exist on mainnet yet. Send at least 1 XLM to it to activate it first.'
+          : 'Your wallet is not funded on testnet yet. Fund it with the Friendbot first.',
         400,
       );
     }

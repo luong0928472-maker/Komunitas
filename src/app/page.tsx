@@ -6,7 +6,7 @@ import { Wordmark } from '@/components/Logo';
 import { ConnectButton } from '@/components/ConnectButton';
 import { Button } from '@/components/ui/button';
 import { api, type Stats } from '@/lib/api';
-import { formatAmount } from '@/lib/utils';
+import { formatAmount, NETWORK } from '@/lib/utils';
 
 const STEPS = [
   {
@@ -119,7 +119,7 @@ export default function LandingPage() {
       <footer className="border-t border-stone-200/70">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-2 px-4 py-8 text-sm text-stone-500 sm:flex-row sm:items-center sm:px-6">
           <Wordmark />
-          <span>Stellar APAC Hackathon · testnet · default asset XLM</span>
+          <span>Stellar APAC Hackathon · {NETWORK === 'public' ? 'mainnet' : 'testnet'} · default asset XLM</span>
         </div>
       </footer>
     </div>

@@ -9,12 +9,15 @@ and let an open vote — not a treasurer — release the funds. Every contributi
 proposal, vote, and disbursement is a **real Soroban contract call** you can
 verify on-chain.
 
-[![Live on Vercel](https://img.shields.io/badge/live-komunitas--rho.vercel.app-1b9e6e?style=flat-square)](https://komunitas-rho.vercel.app)
-![Stellar Testnet](https://img.shields.io/badge/Stellar-Testnet-111?style=flat-square&logo=stellar)
+[![Live on Vercel](https://img.shields.io/badge/live-komunitas--iota.vercel.app-1b9e6e?style=flat-square)](https://komunitas-iota.vercel.app)
+[![Follow on X](https://img.shields.io/badge/@KomunitasXLM-000?style=flat-square&logo=x)](https://x.com/KomunitasXLM)
+![Stellar Mainnet](https://img.shields.io/badge/Stellar-Mainnet-111?style=flat-square&logo=stellar)
 ![Default asset XLM](https://img.shields.io/badge/default_asset-XLM_(native)-f5b301?style=flat-square)
 ![Next.js 16](https://img.shields.io/badge/Next.js-16-000?style=flat-square&logo=nextdotjs)
 
-**→ [komunitas-rho.vercel.app](https://komunitas-rho.vercel.app)**
+**→ [komunitas-iota.vercel.app](https://komunitas-iota.vercel.app)** — live on **Stellar Mainnet** · follow [@KomunitasXLM](https://x.com/KomunitasXLM)
+
+Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](https://stellar.expert/explorer/public/contract/CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR)
 
 <img src="screen-shot/01-landing.jpg" alt="komunitas landing — on-chain participatory budgeting" width="780" />
 
@@ -45,7 +48,7 @@ money, they decide when it moves, and everyone else just has to trust the group 
 There's no shared ledger and no rule that says *the room decided this*.
 
 komunitas removes that single point of trust. Members pool value into **one deployed
-Soroban smart contract** on Stellar testnet. Anyone can propose a project — what it is,
+Soroban smart contract** on Stellar mainnet. Anyone can propose a project — what it is,
 who gets paid, how much it needs. The community votes. The instant a proposal carries
 a strict majority, **the contract itself disburses the grant to the recipient in the
 same on-chain transaction** — with no one clicking a "send" button. What you get back
@@ -58,8 +61,8 @@ is a transaction hash on stellar.expert, not a promise.
 1. **Look around, no wallet required.** Browse the treasury, proposals and stats fully
    unconnected. You only connect a wallet when you want to *act*.
 2. **Connect (SEP-10).** A challenge transaction is signed by your Freighter key and verified
-   server-side. The signature is pinned to **testnet** regardless of your wallet's active
-   network, so connect works even if Freighter is on mainnet.
+   server-side. The signature is pinned to **the app's configured network** (mainnet in
+   production) regardless of your wallet's active network.
 3. **Contribute.** The server builds an unsigned `contribute(member, amount)` invocation
    of the `komunitas-fund` Soroban contract. You sign it in Freighter; the server submits
    it to Soroban RPC and polls until confirmed. Native XLM is the fund token — no trustline
@@ -74,17 +77,15 @@ is a transaction hash on stellar.expert, not a promise.
    the transaction hash.
 
 ---
-## Demo & Pitch Deck
 
-- **Demo Video:** [Watch Demo](https://drive.google.com/file/d/1hJnOvXjXLHOx3pHYqwo4o72ZqWagfODx/view?usp=drive_link)
-- **Pitch Deck:** [View Pitch Deck](https://drive.google.com/file/d/1qfbuUtlUu1MxNGZtaaDIRboVy-4J4-uo/view?usp=drive_link)
----
 ## What makes it real
 
 - **Real deployed Soroban smart contract.** All contributions, proposals, votes, and
-  disbursements are real contract invocations on Stellar testnet.
-  Contract id: `CBVWE2OYZMFDMYN6DT5JMIJCUOIYABUAPONISO7EX7HSUTIYMNN67NIX` —
-  [verify on stellar.expert](https://stellar.expert/explorer/testnet/contract/CBVWE2OYZMFDMYN6DT5JMIJCUOIYABUAPONISO7EX7HSUTIYMNN67NIX).
+  disbursements are real contract invocations on **Stellar mainnet**.
+  Contract id: `CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR` —
+  [verify on stellar.expert](https://stellar.expert/explorer/public/contract/CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR).
+  (Testnet twin for development: `CBVWE2OYZMFDMYN6DT5JMIJCUOIYABUAPONISO7EX7HSUTIYMNN67NIX` —
+  full records in [`contracts/DEPLOYMENT.md`](contracts/DEPLOYMENT.md).)
 - **Atomic auto-disburse.** The winning vote and the fund release happen in one Soroban
   transaction; there is no separate treasury-keypair payment step.
 - **XLM is the default; USDC is opt-in.** The contract uses the native XLM Stellar Asset
@@ -120,12 +121,12 @@ Real activity on komunitas — wallet sign-ins, contributions, proposals, and vo
 
 | Piece | How |
 |---|---|
-| **Wallet auth (SEP-10 style)** | Server issues a sequence-0 challenge tx; Freighter signs it; server verifies the signature with `Keypair.verify()` and sets an HttpOnly session cookie. Network passphrase pinned to testnet. |
-| **Soroban smart contract** | Deployed `komunitas-fund` contract (`CBVWE2OYZMFDMYN6DT5JMIJCUOIYABUAPONISO7EX7HSUTIYMNN67NIX`) on Stellar testnet. Entrypoints: `contribute`, `create_proposal`, `vote` (auto-disburses on strict majority), `disburse` (admin fallback). Built with soroban-sdk 22, Rust 1.89.0, optimised wasm ~18 KB. |
-| **Contributions** | Server builds an unsigned `contribute(member, amount)` contract invocation; member signs in Freighter; server submits to Soroban RPC (`soroban-testnet.stellar.org`) and polls until confirmed. |
+| **Wallet auth (SEP-10 style)** | Server issues a sequence-0 challenge tx; Freighter signs it; server verifies the signature with `Keypair.verify()` and sets an HttpOnly session cookie. Network passphrase pinned to the app's configured network (mainnet in production). |
+| **Soroban smart contract** | Deployed `komunitas-fund` contract (`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`) on Stellar mainnet. Entrypoints: `contribute`, `create_proposal`, `vote` (auto-disburses on strict majority), `disburse` (admin fallback). Built with soroban-sdk 22, Rust 1.89.0, optimised wasm ~18 KB. |
+| **Contributions** | Server builds an unsigned `contribute(member, amount)` contract invocation; member signs in Freighter; server submits to Soroban RPC and polls until confirmed. |
 | **Disbursement** | Auto-disbursement happens on-chain inside the `vote()` call the moment a strict majority is reached — one atomic Soroban transaction, no separate treasury keypair payment. |
-| **Assets** | Native XLM via the XLM Stellar Asset Contract (SAC id: `CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC`). USDC opt-in via classic `changeTrust`. Amounts in stroops as `BigInt`. |
-| **Explorer proof** | Every tx hash links to `stellar.expert/explorer/testnet`. The contract itself is browsable at the stellar.expert link above. |
+| **Assets** | Native XLM via the XLM Stellar Asset Contract (mainnet SAC id: `CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA`). USDC opt-in via classic `changeTrust` to Circle's issuer. Amounts in stroops as `BigInt`. |
+| **Explorer proof** | Every tx hash links to `stellar.expert/explorer/public`. The contract itself is browsable at the stellar.expert link above. |
 
 ---
 
@@ -133,7 +134,7 @@ Real activity on komunitas — wallet sign-ins, contributions, proposals, and vo
 
 The chain from a button click to an on-chain Soroban transaction is real end to end. Every contract invocation is a `new Contract(getContractId()).call(method, ...args)` placed in a `TransactionBuilder` and simulated via `server.prepareTransaction(tx)`; every signed XDR is re-submitted via `server.sendTransaction(tx)` and polled with `server.getTransaction(hash)`. There are no stubs, no mock signatures, and no server-side keypair signing on the member's behalf.
 
-Contract id: `CBVWE2OYZMFDMYN6DT5JMIJCUOIYABUAPONISO7EX7HSUTIYMNN67NIX` — methods: `contribute`, `create_proposal`, `vote`, `disburse`, `get_proposal`.
+Contract id (mainnet): `CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR` — methods: `contribute`, `create_proposal`, `vote`, `disburse`, `get_proposal`.
 
 **`src/server/controller/fund.controller.ts`** — HTTP boundary for contribute (and a classic `changeTrust` for the optional USDC opt-in). Phase 1 returns the unsigned XDR for Freighter; phase 2 submits the wallet-signed XDR to Soroban RPC.
 
@@ -247,7 +248,7 @@ export function getContractId(): string {
 }
 ```
 
-**Browser side** — `src/lib/wallet.ts` calls Freighter's `signTransaction(xdr, { networkPassphrase })` (network pinned to testnet). `src/lib/api.ts` POSTs the unsigned build request to `/api/fund/contribute/prepare`, then the wallet-signed XDR to `/api/fund/contribute/submit`. Same shape for `/api/proposals/prepare`, `/api/proposals/submit`, `/api/proposals/[id]/vote/prepare`, `/api/proposals/[id]/vote/submit`.
+**Browser side** — `src/lib/wallet.ts` calls Freighter's `signTransaction(xdr, { networkPassphrase })` (network pinned via `NEXT_PUBLIC_STELLAR_NETWORK` — mainnet in production). `src/lib/api.ts` POSTs the unsigned build request to `/api/fund/contribute/prepare`, then the wallet-signed XDR to `/api/fund/contribute/submit`. Same shape for `/api/proposals/prepare`, `/api/proposals/submit`, `/api/proposals/[id]/vote/prepare`, `/api/proposals/[id]/vote/submit`.
 
 ---
 
@@ -313,11 +314,14 @@ pnpm test            # vitest unit tests
 pnpm run test:e2e    # Playwright (set PLAYWRIGHT_BASE_URL for the live URL)
 
 # Soroban contract (Rust):
-cd source-code/contracts && make test
+cd contracts && make test
 ```
 
 Fund a fresh testnet wallet with [Friendbot](https://friendbot.stellar.org) before
 contributing.
+
+For the **production (mainnet)** environment block — contract id, RPC, XLM SAC, Circle
+USDC issuer — see [`contracts/DEPLOYMENT.md`](contracts/DEPLOYMENT.md).
 
 ---
 
@@ -358,5 +362,5 @@ source-code/
 ---
 
 <div align="center">
-<sub>komunitas — Stellar APAC Hackathon · on-chain participatory budgeting · testnet · default asset XLM</sub>
+<sub>komunitas — Stellar APAC Hackathon · on-chain participatory budgeting · mainnet · default asset XLM</sub>
 </div>

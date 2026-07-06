@@ -13,7 +13,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: 'komunitas — a treasury your community steers',
   description:
-    'Pool XLM into a shared community treasury, propose projects, vote, and watch funds release on-chain when the vote carries. Built on Stellar testnet.',
+    'Pool XLM into a shared community treasury, propose projects, vote, and watch funds release on-chain when the vote carries. Built on Stellar.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

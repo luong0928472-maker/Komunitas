@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useWallet } from '@/components/WalletProvider';
 import { signXdr } from '@/lib/wallet';
 import { api } from '@/lib/api';
-import { formatAmount, toStroops, txUrl } from '@/lib/utils';
+import { formatAmount, NETWORK, toStroops, txUrl } from '@/lib/utils';
 
 const PRESETS = ['10', '25', '50', '100'];
 
@@ -169,7 +169,7 @@ export default function ContributePage() {
             Contribute {valid ? human : ''} XLM
           </Button>
           <p className="text-center text-xs text-stone-400">
-            You will sign a Soroban contract call in Freighter. Network is pinned to Stellar testnet.
+            You will sign a Soroban contract call in Freighter. Network is pinned to Stellar {NETWORK === 'public' ? 'mainnet' : 'testnet'}.
           </p>
         </CardContent>
       </Card>

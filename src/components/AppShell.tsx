@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Vault, ScrollText, BarChart3 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, NETWORK } from '@/lib/utils';
 import { Wordmark } from './Logo';
 import { ConnectButton } from './ConnectButton';
 
@@ -62,7 +62,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">{children}</main>
       <footer className="mx-auto max-w-6xl px-4 pb-10 pt-4 sm:px-6">
         <div className="flex flex-col items-start justify-between gap-2 border-t border-stone-200/70 pt-6 text-sm text-stone-500 sm:flex-row sm:items-center">
-          <span>komunitas · community treasuries on Stellar testnet</span>
+          <span>komunitas · community treasuries on Stellar {NETWORK === 'public' ? 'mainnet' : 'testnet'}</span>
           <Link href="/stats" className="hover:text-brand-700">
             Live interaction stats →
           </Link>
