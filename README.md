@@ -57,7 +57,7 @@ Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](h
 - [x] **Screenshots of analytics or transaction activity** — `screen-shot/stats.jpg` and the on-chain `komunitas-fund` contract stats
 - [x] **Updated README and documentation** — [proof package](docs/level5-proof-package.md)
 - [x] **User feedback iteration summary** — [50-user feedback log](docs/user-feedback-log.md) and [improvement summary](docs/level5-feedback-iteration-summary.md)
-- [x] **Google Sheet response export** — [open native Google Sheet](<KOMUNITAS_GOOGLE_SHEET_URL>)
+- [x] **Google Sheet response export** — [open native Google Sheet](https://docs.google.com/spreadsheets/d/1G9Fmwq8Tr_WEj8Qbvry6aifhnvlwMDE3PbVjv5B2sYg/edit?usp=drivesdk)
 
 ### Monthly submission
 
@@ -463,7 +463,7 @@ curl https://horizon-testnet.stellar.org/accounts/<publicKey>
 Two URLs are placeholders until the headless Drive auth flow is run:
 
 ```
-<KOMUNITAS_GOOGLE_SHEET_URL>    # native Google Sheet response export
+https://docs.google.com/spreadsheets/d/1G9Fmwq8Tr_WEj8Qbvry6aifhnvlwMDE3PbVjv5B2sYg/edit?usp=drivesdk    # native Google Sheet response export
 ```
 
 Setup: see [`docs/google-drive-auth-setup.md`](docs/google-drive-auth-setup.md). Once the project owner pastes `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_AUTH_CODE`, the script runs:
