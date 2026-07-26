@@ -26,4 +26,9 @@ The two URLs above (`<KOMUNITAS_GOOGLE_FORM_URL>` and `<KOMUNITAS_GOOGLE_SHEET_U
 
 ## Sheet response export
 
-- Native Google Sheet response export: https://docs.google.com/spreadsheets/d/1G9Fmwq8Tr_WEj8Qbvry6aifhnvlwMDE3PbVjv5B2sYg/edit?usp=drivesdk
+- Native Google Sheet response export: https://docs.google.com/spreadsheets/d/1XDR18fd9OALEsJeuqfW5lF3yVoUzlO7_baImKKQ9Uoo/edit?usp=drivesdk
+
+
+## Live Form URL
+
+- Google Form: https://docs.google.com/forms/d/e/1FAIpQLSdu0udyZFj-srkmH9sOgpTD8vREEwCsdgm1s3eTcz90TMgiXA/viewform
