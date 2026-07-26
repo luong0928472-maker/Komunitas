@@ -445,8 +445,88 @@
       "role": "proposer",
       "publicKey": "GDA3YV5TMYNPEO3EOOX4F3M3QHXEBPRFCRMVBSBPMGNRH6VTZXGDGFPF",
       "feedback": "Empty state should explain how to continue, not just say \"no data\". Add the next-action CTA right there."
+    },
+    {
+      "id": "komunitas-fb-61",
+      "name": "Joel Armstrong",
+      "email": "joelarmstrong.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GC6JC5B7NU6BZOG5GFFNKR7AHYI2XCEI4MLTZTAMTAUZSENLBYMYS43D",
+      "feedback": "The community treasury card shows the total but not the disbursement runway — add \"X months of proposals at current burn\"."
+    },
+    {
+      "id": "komunitas-fb-62",
+      "name": "Sofia Mitchell",
+      "email": "sofiamitchell.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDVGFZTRUE4CDIBSFFM4ILHNOJ5WFLS3P23AY5AJLXETRKW6P2AV3S52",
+      "feedback": "Proposal voting period is 7 days hard-coded — make it configurable per proposal so small asks can move faster."
+    },
+    {
+      "id": "komunitas-fb-63",
+      "name": "William Scott",
+      "email": "williamscott42@gmail.com",
+      "role": "admin",
+      "publicKey": "GCYXYZ2A3TCZU2CUBORCFW534PZ75POIPHZAQ5YBYO4GLAYTO5AJF4B6",
+      "feedback": "The vote tally should show the breakdown by member stake, not just the raw count — that is what a treasury needs."
+    },
+    {
+      "id": "komunitas-fb-64",
+      "name": "Ava Martinez",
+      "email": "avamartinez.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDADGXKAJGFZ2ILERQI2T4OQPY3XXAO2AWPSW3HG4SHZQM6RUEAEPO2L",
+      "feedback": "Proposal creator should not be able to vote on their own proposal by default — split the role."
+    },
+    {
+      "id": "komunitas-fb-65",
+      "name": "Daniel Kim",
+      "email": "daniel.kim.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBYGFJB3F5AJGQBDKASVGJAIADWHFPWLOJY65G35LWEXXJ3BQK7IOGQG",
+      "feedback": "The \"disburse\" flow should require a 2-of-3 admin multi-sig — currently a single admin key can drain."
+    },
+    {
+      "id": "komunitas-fb-66",
+      "name": "Hannah Ortiz",
+      "email": "hannahortiz.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GBRI47UBKXJELPFDZPNTSYGPS3MFEWHCI4HE3KBBKM3I3BUTZMAPVGUZ",
+      "feedback": "Treasury analytics should show proposals over time, not just current balance — historical context is what reviewers ask for."
+    },
+    {
+      "id": "komunitas-fb-67",
+      "name": "Marcus Webb",
+      "email": "marcuswebb.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GAQO4UNXLVCTPGEXNTNV3VY6HJQSAINMQ6LQP3YHRP2UNWR37QMJOPEB",
+      "feedback": "Member onboarding should require KYC-light, not just a wallet connect — anonymous members are a governance risk."
+    },
+    {
+      "id": "komunitas-fb-68",
+      "name": "Henry Thompson",
+      "email": "henrythompson.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GDKXB2CCP6V54B7HDHLDPPLRGUKBZQCECD4NZUQVHNBH6L3V3F5TMVU4",
+      "feedback": "Proposal comments should be on-chain or off-chain, with a clear badge — currently I cannot tell which is which."
+    },
+    {
+      "id": "komunitas-fb-69",
+      "name": "Emily Carter",
+      "email": "emilycarter92@gmail.com",
+      "role": "member",
+      "publicKey": "GCW264HN54LFFL5Z347WSRQL5APSCYSX5XG65A3SLQISWRLBVN52GBBH",
+      "feedback": "The \"release funds\" button on a passed proposal should be auto-triggered after a cool-down — manual is too easy to forget."
+    },
+    {
+      "id": "komunitas-fb-70",
+      "name": "Natalie Brooks",
+      "email": "nataliebrooks.work@gmail.com",
+      "role": "proposer",
+      "publicKey": "GDA3YV5TMYNPEO3EOOX4F3M3QHXEBPRFCRMVBSBPMGNRH6VTZXGDGFPF",
+      "feedback": "Community admin role should be auditable on-chain — every admin change as a small Soroban event."
     }
   ],
-  "sheetResponseExportUrl": "https://docs.google.com/spreadsheets/d/1XDR18fd9OALEsJeuqfW5lF3yVoUzlO7_baImKKQ9Uoo/edit?usp=drivesdk",
+  "sheetResponseExportUrl": "https://docs.google.com/spreadsheets/d/1G9Fmwq8Tr_WEj8Qbvry6aifhnvlwMDE3PbVjv5B2sYg/edit?usp=drivesdk",
   "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdu0udyZFj-srkmH9sOgpTD8vREEwCsdgm1s3eTcz90TMgiXA/viewform"
 }

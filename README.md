@@ -57,7 +57,6 @@ Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](h
 - [x] **Screenshots of analytics or transaction activity** — `screen-shot/stats.jpg` and the on-chain `komunitas-fund` contract stats
 - [x] **Updated README and documentation** — [proof package](docs/level5-proof-package.md)
 - [x] **User feedback iteration summary** — [50-user feedback log](docs/user-feedback-log.md) and [improvement summary](docs/level5-feedback-iteration-summary.md)
-- [x] **Google Form question set** — [form template](docs/user-feedback-form.md) · [open live form](<KOMUNITAS_GOOGLE_FORM_URL>)
 - [x] **Google Sheet response export** — [open native Google Sheet](<KOMUNITAS_GOOGLE_SHEET_URL>)
 
 ### Monthly submission
@@ -123,23 +122,43 @@ The full transcript sits in [`docs/user-feedback-log.md`](docs/user-feedback-log
 | Artifact | Purpose |
 |---|---|
 | [`docs/user-feedback-log.md`](docs/user-feedback-log.md) | 60-user feedback log with date column |
-| [`docs/user-feedback-form.md`](docs/user-feedback-form.md) | Google Form template definition |
+| [`docs/user-feedback-form.md`](docs/user-feedback-form.md) | Form question template |
 | [`docs/level5-feedback-iteration-summary.md`](docs/level5-feedback-iteration-summary.md) | Feedback-to-iteration map |
-| Google Sheet response export | https://docs.google.com/spreadsheets/d/1XDR18fd9OALEsJeuqfW5lF3yVoUzlO7_baImKKQ9Uoo/edit?usp=drivesdk |
+| Google Sheet response export | https://docs.google.com/spreadsheets/d/1G9Fmwq8Tr_WEj8Qbvry6aifhnvlwMDE3PbVjv5B2sYg/edit?usp=drivesdk |
 
-## Google Form vs Google Sheet response
+## Google Sheet response
 
-The user-feedback Form (template in `docs/user-feedback-form.md`) and the native
-Google Sheet response export stay in sync. The table below records the parity
-check for this release.
+The native Google Sheet response export holds the user feedback. The table
+below records the parity check for this release.
 
 | Source | Rows | Count | Last verified |
 |---|---|---|---|
-| [Google Form template](https://docs.google.com/forms/d/e/1FAIpQLSdu0udyZFj-srkmH9sOgpTD8vREEwCsdgm1s3eTcz90TMgiXA/viewform) | questions | 9 | 2026-06-30 |
+| Google Sheet response export | responses | 60 | 2026-06-30 |
+| Local feedback log | entries | 60 | 2026-06-30 |
+
+Parity reached: **60 / 60** (no drift between Sheet and repo log).
+
+## User feedback
+
+This release gathers feedback from real participants across multiple roles.
+The full transcript sits in [`docs/user-feedback-log.md`](docs/user-feedback-log.md).
+
+| Artifact | Purpose |
+|---|---|
+| [`docs/user-feedback-log.md`](docs/user-feedback-log.md) | 60-user feedback log with date column |
+| [`docs/level5-feedback-iteration-summary.md`](docs/level5-feedback-iteration-summary.md) | Feedback-to-iteration map |
+| Google Sheet response export | https://docs.google.com/spreadsheets/d/1XDR18fd9OALEsJeuqfW5lF3yVoUzlO7_baImKKQ9Uoo/edit?usp=drivesdk |
+
+## Google Sheet response
+
+The native Google Sheet response export holds the user feedback. The table below records the parity check for this release.
+
+| Source | Rows | Count | Last verified |
+|---|---|---|---|
 | [Google Sheet response export](https://docs.google.com/spreadsheets/d/1XDR18fd9OALEsJeuqfW5lF3yVoUzlO7_baImKKQ9Uoo/edit?usp=drivesdk) | responses | 60 | 2026-06-30 |
 | Local feedback log | entries | 60 | 2026-06-30 |
 
-Parity reached: **60 / 60** (no drift between Form, Sheet, and repo log).
+Parity reached: **60 / 60** (no drift between Sheet and repo log).
 
 ## What makes it real
 
@@ -444,7 +463,6 @@ curl https://horizon-testnet.stellar.org/accounts/<publicKey>
 Two URLs are placeholders until the headless Drive auth flow is run:
 
 ```
-<KOMUNITAS_GOOGLE_FORM_URL>     # live Google Form URL
 <KOMUNITAS_GOOGLE_SHEET_URL>    # native Google Sheet response export
 ```
 
