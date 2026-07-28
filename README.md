@@ -9,15 +9,15 @@ and let an open vote — not a treasurer — release the funds. Every contributi
 proposal, vote, and disbursement is a **real Soroban contract call** you can
 verify on-chain.
 
-[![Live on Vercel](https://img.shields.io/badge/live-komunitas--iota.vercel.app-1b9e6e?style=flat-square)](https://komunitas-iota.vercel.app)
+[![Live on Vercel](https://img.shields.io/badge/live-komunitas--rho.vercel.app-1b9e6e?style=flat-square)](https://komunitas-rho.vercel.app)
 [![Follow on X](https://img.shields.io/badge/@KomunitasXLM-000?style=flat-square&logo=x)](https://x.com/KomunitasXLM)
 ![Stellar Mainnet](https://img.shields.io/badge/Stellar-Mainnet-111?style=flat-square&logo=stellar)
 ![Default asset XLM](https://img.shields.io/badge/default_asset-XLM_(native)-f5b301?style=flat-square)
 ![Next.js 16](https://img.shields.io/badge/Next.js-16-000?style=flat-square&logo=nextdotjs)
 
-**→ [komunitas-iota.vercel.app](https://komunitas-iota.vercel.app)** — live on **Stellar Mainnet** · follow [@KomunitasXLM](https://x.com/KomunitasXLM)
+**→ [komunitas-rho.vercel.app](https://komunitas-rho.vercel.app)** — live on **Stellar Mainnet** · follow [@KomunitasXLM](https://x.com/KomunitasXLM)
 
-Marketing landing page: [`/landing`](https://komunitas-iota.vercel.app/landing)
+Marketing landing page: [`/landing`](https://komunitas-rho.vercel.app/landing)
 
 Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](https://stellar.expert/explorer/public/contract/CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR)
 
@@ -49,7 +49,7 @@ Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](h
 
 - [x] **Public GitHub repository** — link to the public repo
 - [x] **Minimum 20+ meaningful commits** — see commit history on `main`
-- [x] **Live deployed application** — https://komunitas-iota.vercel.app
+- [x] **Live deployed application** — https://komunitas-rho.vercel.app
 - [x] **PPT/Pitch deck link** — _add deck link_
 - [x] **Demo video link** — _add demo link_
 
