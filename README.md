@@ -17,6 +17,8 @@ verify on-chain.
 
 **→ [komunitas-iota.vercel.app](https://komunitas-iota.vercel.app)** — live on **Stellar Mainnet** · follow [@KomunitasXLM](https://x.com/KomunitasXLM)
 
+Marketing landing page: [`/landing`](https://komunitas-iota.vercel.app/landing)
+
 Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](https://stellar.expert/explorer/public/contract/CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR)
 
 <img src="screen-shot/01-landing.jpg" alt="komunitas landing — on-chain participatory budgeting" width="780" />
