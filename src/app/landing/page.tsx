@@ -4,10 +4,16 @@ import { useEffect, useState } from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
+  CheckCircle2,
   Coins,
+  Compass,
   FileCheck2,
+  Globe,
+  Landmark,
   ShieldCheck,
+  Users,
   Vote,
+  Wallet,
 } from 'lucide-react';
 import { Wordmark } from '@/components/Logo';
 import { Button } from '@/components/ui/button';
@@ -39,6 +45,67 @@ const FLOW = [
     title: 'Release',
     body: 'The moment yes votes cross a strict majority, the contract disburses itself. No treasurer approval step exists to skip or stall.',
   },
+];
+
+const ANCHOR_LINKS = [
+  { href: '#intro', label: 'Intro' },
+  { href: '#ecosystem', label: 'Ecosystem' },
+  { href: '#roadmap', label: 'Roadmap' },
+  { href: '#how-it-works', label: 'How it works' },
+];
+
+const ECOSYSTEM = [
+  {
+    icon: Users,
+    title: 'Contributors',
+    body: 'Members who send XLM into the shared treasury. Every deposit becomes their on-chain stake.',
+  },
+  {
+    icon: FileCheck2,
+    title: 'Proposers',
+    body: 'Any member can open a funding request naming a recipient and an amount — no gatekeeper approval.',
+  },
+  {
+    icon: Vote,
+    title: 'Voters',
+    body: 'Members who decide. One vote per member per proposal, tallied on-chain, no closed count.',
+  },
+  {
+    icon: Landmark,
+    title: 'Treasury contract',
+    body: 'komunitas-fund, the Soroban contract that holds every stroop and enforces the vote outcome itself.',
+  },
+  {
+    icon: Globe,
+    title: 'Stellar network',
+    body: 'The public ledger every contribution, proposal, vote, and release settles on — mainnet, not a sidechain.',
+  },
+  {
+    icon: Wallet,
+    title: 'Freighter',
+    body: 'The wallet extension members sign contribute, propose, and vote transactions with. No custodial signing.',
+  },
+  {
+    icon: Coins,
+    title: 'Native XLM',
+    body: 'The one asset the treasury holds and disburses, moved via the Stellar Asset Contract — no trustline needed.',
+  },
+];
+
+const ROADMAP_LIVE = [
+  'Contribute XLM into the shared treasury contract',
+  'Open a funding proposal naming a recipient and amount',
+  'Vote yes or no, one vote per member per proposal',
+  'Automatic on-chain release the moment a strict majority passes',
+  'Full transparency — every entry readable straight from the contract',
+  'Live on Stellar mainnet',
+];
+
+const ROADMAP_NEXT = [
+  'More granular proposal categories',
+  'Delegated voting for members who want to assign their vote',
+  'Independent contract audit',
+  'Additional language support beyond English',
 ];
 
 function LedgerRow({ label, value, loading }: { label: string; value: string; loading: boolean }) {
@@ -80,7 +147,17 @@ export default function KomunitasLanding() {
         </nav>
       </header>
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-12 sm:px-6 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+      <nav className="border-y border-stone-200/70 bg-white/60">
+        <div className="mx-auto flex max-w-6xl items-center gap-5 overflow-x-auto px-4 py-2.5 text-sm font-medium text-stone-600 sm:px-6">
+          {ANCHOR_LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="whitespace-nowrap hover:text-brand-800">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <section id="intro" className="mx-auto grid max-w-6xl scroll-mt-14 gap-10 px-4 pb-16 pt-12 sm:px-6 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-sm font-medium text-brand-800">
             Stellar mainnet · every entry public
@@ -167,6 +244,125 @@ export default function KomunitasLanding() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section id="ecosystem" className="mx-auto max-w-6xl scroll-mt-14 px-4 pb-24 sm:px-6">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-brand-700">
+          Ecosystem
+        </h2>
+        <p className="mt-3 max-w-2xl text-stone-600">
+          komunitas is one community-fund contract, not a multi-token protocol. Here is every
+          real actor that touches it — no partners, no invented integrations.
+        </p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {ECOSYSTEM.map((item) => (
+            <div key={item.title} className="rounded-2xl border border-stone-200/80 bg-white p-5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-100 text-brand-700">
+                <item.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-3 font-display text-base font-semibold text-ink">{item.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-stone-600">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="roadmap" className="mx-auto max-w-6xl scroll-mt-14 px-4 pb-24 sm:px-6">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-brand-700">
+          Roadmap
+        </h2>
+        <p className="mt-3 max-w-2xl text-stone-600">
+          What's actually shipped today, and the direction we're heading — not dates, not
+          promises.
+        </p>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          <div className="rounded-2xl border border-stone-200/80 bg-white p-6">
+            <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-stone-500">
+              Live now
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {ROADMAP_LIVE.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm text-stone-700">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-dashed border-stone-300 bg-white/60 p-6">
+            <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-stone-500">
+              What's next
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {ROADMAP_NEXT.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm text-stone-600">
+                  <Compass className="mt-0.5 h-4 w-4 shrink-0 text-stone-400" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs text-stone-400">Direction, not a commitment or timeline.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" className="mx-auto max-w-6xl scroll-mt-14 px-4 pb-24 sm:px-6">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-brand-700">
+          How it works
+        </h2>
+        <p className="mt-3 max-w-2xl text-stone-600">
+          The mechanics, straight from the deployed contract — komunitas-fund.
+        </p>
+        <div className="mt-8 space-y-4">
+          <div className="rounded-2xl border border-stone-200/80 bg-white p-6">
+            <span className="font-mono text-sm font-semibold text-brand-800">
+              contribute(member, amount)
+            </span>
+            <p className="mt-2 text-sm leading-relaxed text-stone-600">
+              Pulls native XLM from the member's wallet into the contract's own custody via the
+              Stellar Asset Contract — no trustline needed. Tracks each member's cumulative
+              stake and counts them as a member the first time they contribute.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-stone-200/80 bg-white p-6">
+            <span className="font-mono text-sm font-semibold text-brand-800">
+              create_proposal(proposer, recipient, amount)
+            </span>
+            <p className="mt-2 text-sm leading-relaxed text-stone-600">
+              Anyone can open a request naming a recipient and an amount. It starts Active —
+              recorded on-chain before a single vote is cast.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-stone-200/80 bg-white p-6">
+            <span className="font-mono text-sm font-semibold text-brand-800">
+              vote(voter, proposal_id, in_favor)
+            </span>
+            <p className="mt-2 text-sm leading-relaxed text-stone-600">
+              One vote per member per proposal, enforced on-chain. The instant yes-votes cross a
+              strict majority of members (<code className="font-mono text-brand-800">2 * yes &gt; member_count</code>),
+              the contract disburses the grant to the recipient in that same transaction and the
+              proposal turns Funded. If the majority passes but the treasury is short, it turns
+              Passed and waits.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-stone-200/80 bg-white p-6">
+            <span className="font-mono text-sm font-semibold text-brand-800">disburse(proposal_id)</span>
+            <p className="mt-2 text-sm leading-relaxed text-stone-600">
+              An admin-gated fallback that completes a Passed proposal once the treasury holds
+              enough — the same payout logic the automatic release uses, guarded against
+              double-pay.
+            </p>
+          </div>
+          <a
+            href={EXPLORER_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-stone-50 px-3 py-2 font-mono text-xs text-stone-700 hover:bg-stone-100"
+          >
+            View komunitas-fund on Stellar Expert
+            <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-brand-700" />
+          </a>
         </div>
       </section>
 
