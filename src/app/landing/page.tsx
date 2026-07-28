@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import {
@@ -108,6 +107,64 @@ const ROADMAP_NEXT = [
   'Independent contract audit',
   'Additional language support beyond English',
 ];
+
+const CONTRIBUTOR_NODE_POSITIONS = [
+  { x: 26, y: 38 },
+  { x: 26, y: 82 },
+  { x: 26, y: 140 },
+  { x: 26, y: 184 },
+];
+const TREASURY_NODE = { x: 165, y: 111, r: 28 };
+const PROPOSAL_NODE = { x: 272, y: 111, r: 18 };
+
+function FundFlowDiagram() {
+  return (
+    <svg
+      viewBox="0 0 320 220"
+      preserveAspectRatio="xMidYMid slice"
+      className="absolute inset-0 h-full w-full"
+      aria-hidden="true"
+    >
+      <defs>
+        <marker id="fund-flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--color-accent-500)" />
+        </marker>
+      </defs>
+      {CONTRIBUTOR_NODE_POSITIONS.map((node) => (
+        <path
+          key={`${node.x}-${node.y}`}
+          d={`M${node.x},${node.y} C ${node.x + 70},${node.y} ${TREASURY_NODE.x - 30},${TREASURY_NODE.y} ${TREASURY_NODE.x - TREASURY_NODE.r},${TREASURY_NODE.y}`}
+          fill="none"
+          stroke="var(--color-brand-400)"
+          strokeWidth="2"
+          strokeDasharray="4 5"
+          className="animate-flow-dash"
+        />
+      ))}
+      {CONTRIBUTOR_NODE_POSITIONS.map((node) => (
+        <circle key={`${node.x}-${node.y}-dot`} cx={node.x} cy={node.y} r="7" fill="var(--color-brand-500)" />
+      ))}
+      <circle
+        cx={TREASURY_NODE.x}
+        cy={TREASURY_NODE.y}
+        r={TREASURY_NODE.r}
+        fill="var(--color-brand-700)"
+        stroke="var(--color-paper)"
+        strokeWidth="3"
+      />
+      <line
+        x1={TREASURY_NODE.x + TREASURY_NODE.r}
+        y1={TREASURY_NODE.y}
+        x2={PROPOSAL_NODE.x - PROPOSAL_NODE.r - 4}
+        y2={PROPOSAL_NODE.y}
+        stroke="var(--color-accent-500)"
+        strokeWidth="3"
+        markerEnd="url(#fund-flow-arrow)"
+      />
+      <circle cx={PROPOSAL_NODE.x} cy={PROPOSAL_NODE.y} r={PROPOSAL_NODE.r} fill="var(--color-accent-500)" />
+    </svg>
+  );
+}
 
 function LedgerRow({ label, value, loading }: { label: string; value: string; loading: boolean }) {
   return (
@@ -228,14 +285,8 @@ export default function KomunitasLanding() {
           <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-brand-700">
             How the money moves
           </h2>
-          <div className="relative hidden h-16 w-16 shrink-0 overflow-hidden rounded-full ring-4 ring-white sm:block">
-            <Image
-              src="/images/landing/hands-3830752.jpg"
-              alt=""
-              fill
-              sizes="64px"
-              className="object-cover [filter:sepia(.15)_saturate(1.1)]"
-            />
+          <div className="hidden h-16 w-16 shrink-0 items-center justify-center rounded-full bg-brand-100 sm:flex">
+            <Coins className="h-7 w-7 text-brand-700" />
           </div>
         </div>
         <div className="relative mt-8">
@@ -269,14 +320,12 @@ export default function KomunitasLanding() {
         </p>
         <div className="mt-8 grid gap-8 lg:grid-cols-[7fr_5fr] lg:items-start">
           <div className="relative lg:sticky lg:top-24">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[16/11]">
-              <Image
-                src="/images/landing/assembly-27471164.jpg"
-                alt="A community gathered outdoors under a tree for an assembly"
-                fill
-                sizes="(min-width: 1024px) 55vw, 100vw"
-                className="object-cover [filter:sepia(.18)_saturate(1.15)]"
-              />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-50 sm:aspect-[16/11]">
+              <div className="absolute inset-0 bg-civic" aria-hidden />
+              <FundFlowDiagram />
+              <span className="absolute left-6 top-6 font-display text-xs font-semibold uppercase tracking-widest text-brand-800/70 sm:left-8 sm:top-8">
+                Contributors → Treasury → Funded proposal
+              </span>
               <div
                 className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent"
                 aria-hidden
@@ -408,15 +457,7 @@ export default function KomunitasLanding() {
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
         <div className="relative rounded-2xl border border-stone-200/80 bg-white p-8 sm:p-10">
           <div className="pointer-events-none absolute -top-5 right-8 hidden -rotate-3 sm:block">
-            <div className="relative h-24 w-32 overflow-hidden rounded-md border-4 border-white shadow-md ring-1 ring-stone-200">
-              <Image
-                src="/images/landing/board-4425993.jpg"
-                alt=""
-                fill
-                sizes="128px"
-                className="object-cover [filter:sepia(.2)_saturate(1.1)]"
-              />
-            </div>
+            <div className="h-24 w-32 rounded-md border-4 border-white bg-[radial-gradient(circle,var(--color-brand-300)_1.5px,transparent_1.5px)] bg-[length:10px_10px] shadow-md ring-1 ring-stone-200" />
           </div>
           <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center">
             <div>
