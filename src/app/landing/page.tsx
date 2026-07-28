@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import {
@@ -28,22 +29,22 @@ const FLOW = [
   {
     icon: Coins,
     title: 'Contribute',
-    body: 'XLM leaves your wallet and lands in one shared contract. The transfer is a signed Stellar transaction, not a transfer to a person.',
+    body: "Your XLM leaves your wallet and goes straight into the shared contract — a normal signed Stellar transaction, same as sending to a friend, except the receiver here is code everyone can inspect.",
   },
   {
     icon: FileCheck2,
     title: 'Propose',
-    body: 'Anyone in the room can open a request: what it funds, who receives it, how much. It goes on the ledger before a single vote is cast.',
+    body: "Anyone in the group can open a proposal — what it's for, who gets paid, how much — and it sits on the ledger before anyone has voted on it.",
   },
   {
     icon: Vote,
     title: 'Vote',
-    body: 'Members vote yes or no. Every vote is recorded against the proposal — no anonymous tally, no closed-door count.',
+    body: 'Members vote yes or no, one vote each. Every vote stays attached to the proposal for good, so nobody has to take our word for how the count went.',
   },
   {
     icon: ShieldCheck,
     title: 'Release',
-    body: 'The moment yes votes cross a strict majority, the contract disburses itself. No treasurer approval step exists to skip or stall.',
+    body: "Once yes-votes clear a strict majority, the contract pays out right then. Nobody has to sign off, click approve, or remember to send it later.",
   },
 ];
 
@@ -58,37 +59,37 @@ const ECOSYSTEM = [
   {
     icon: Users,
     title: 'Contributors',
-    body: 'Members who send XLM into the shared treasury. Every deposit becomes their on-chain stake.',
+    body: 'Anyone who sends XLM in. The deposit becomes a stake the contract remembers for good.',
   },
   {
     icon: FileCheck2,
     title: 'Proposers',
-    body: 'Any member can open a funding request naming a recipient and an amount — no gatekeeper approval.',
+    body: "Any contributor can name a recipient and an amount and put it up for a vote. There's no committee that signs off on the request first.",
   },
   {
     icon: Vote,
     title: 'Voters',
-    body: 'Members who decide. One vote per member per proposal, tallied on-chain, no closed count.',
+    body: 'Every contributor gets one vote per proposal, tallied on-chain where anyone can recount it themselves.',
   },
   {
     icon: Landmark,
     title: 'Treasury contract',
-    body: 'komunitas-fund, the Soroban contract that holds every stroop and enforces the vote outcome itself.',
+    body: 'komunitas-fund. The actual Soroban contract holding every stroop and enforcing whatever the vote decides.',
   },
   {
     icon: Globe,
     title: 'Stellar network',
-    body: 'The public ledger every contribution, proposal, vote, and release settles on — mainnet, not a sidechain.',
+    body: "Where it all settles: mainnet, the same ledger real XLM lives on, not a testnet built for a demo.",
   },
   {
     icon: Wallet,
     title: 'Freighter',
-    body: 'The wallet extension members sign contribute, propose, and vote transactions with. No custodial signing.',
+    body: 'The wallet members use to sign each contribute, propose, and vote transaction. Nobody hands us their keys.',
   },
   {
     icon: Coins,
     title: 'Native XLM',
-    body: 'The one asset the treasury holds and disburses, moved via the Stellar Asset Contract — no trustline needed.',
+    body: 'The only asset the treasury touches, moved through the Stellar Asset Contract, so there is no trustline to set up first.',
   },
 ];
 
@@ -168,9 +169,9 @@ export default function KomunitasLanding() {
             can quietly edit.
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-stone-600">
-            komunitas replaces the treasurer with a contract. Every stroop of XLM that goes in,
-            every proposal that goes up, every vote that gets cast, every payout that goes out —
-            it's all one open ledger, not a spreadsheet someone could edit after the fact.
+            komunitas swaps the treasurer for a contract. Every stroop of XLM that comes in,
+            every proposal that goes up, every vote that gets cast — it all lands on one public
+            ledger, not a spreadsheet someone could quietly fix later.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link href="/dashboard">
@@ -223,9 +224,20 @@ export default function KomunitasLanding() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-        <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-brand-700">
-          How the money moves
-        </h2>
+        <div className="flex items-start justify-between gap-6">
+          <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-brand-700">
+            How the money moves
+          </h2>
+          <div className="relative hidden h-16 w-16 shrink-0 overflow-hidden rounded-full ring-4 ring-white sm:block">
+            <Image
+              src="/images/landing/hands-3830752.jpg"
+              alt=""
+              fill
+              sizes="64px"
+              className="object-cover [filter:sepia(.15)_saturate(1.1)]"
+            />
+          </div>
+        </div>
         <div className="relative mt-8">
           <div className="absolute left-5 top-2 bottom-2 hidden w-px bg-stone-200 sm:block" aria-hidden />
           <ol className="space-y-8">
@@ -252,19 +264,47 @@ export default function KomunitasLanding() {
           Ecosystem
         </h2>
         <p className="mt-3 max-w-2xl text-stone-600">
-          komunitas is one community-fund contract, not a multi-token protocol. Here is every
-          real actor that touches it — no partners, no invented integrations.
+          komunitas is one community-fund contract — not a suite of tokens or a stack of
+          integrations. Here is everyone and everything that actually touches it.
         </p>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {ECOSYSTEM.map((item) => (
-            <div key={item.title} className="rounded-2xl border border-stone-200/80 bg-white p-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-100 text-brand-700">
-                <item.icon className="h-5 w-5" />
+        <div className="mt-8 grid gap-8 lg:grid-cols-[7fr_5fr] lg:items-start">
+          <div className="relative lg:sticky lg:top-24">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[16/11]">
+              <Image
+                src="/images/landing/assembly-27471164.jpg"
+                alt="A community gathered outdoors under a tree for an assembly"
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                className="object-cover [filter:sepia(.18)_saturate(1.15)]"
+              />
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent"
+                aria-hidden
+              />
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                <p className="font-display text-5xl font-bold text-white sm:text-6xl">
+                  {stats?.members ?? '···'}
+                </p>
+                <p className="mt-1 max-w-xs text-sm leading-relaxed text-white/85">
+                  people have put real XLM into this treasury. Every one of them gets a vote, not
+                  just a seat in the room.
+                </p>
               </div>
-              <h3 className="mt-3 font-display text-base font-semibold text-ink">{item.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-stone-600">{item.body}</p>
             </div>
-          ))}
+          </div>
+          <ul className="divide-y divide-stone-200/70 border-y border-stone-200/70">
+            {ECOSYSTEM.map((item, i) => (
+              <li key={item.title} className="flex gap-4 py-4">
+                <span className="pt-0.5 font-display text-xs font-semibold text-stone-400">
+                  0{i + 1}
+                </span>
+                <div>
+                  <h3 className="font-display text-base font-semibold text-ink">{item.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-stone-600">{item.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -273,8 +313,7 @@ export default function KomunitasLanding() {
           Roadmap
         </h2>
         <p className="mt-3 max-w-2xl text-stone-600">
-          What's actually shipped today, and the direction we're heading — not dates, not
-          promises.
+          What's already live, and where we're taking it next.
         </p>
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
           <div className="rounded-2xl border border-stone-200/80 bg-white p-6">
@@ -302,7 +341,7 @@ export default function KomunitasLanding() {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-xs text-stone-400">Direction, not a commitment or timeline.</p>
+            <p className="mt-4 text-xs text-stone-400">Nothing here is scheduled. It can change.</p>
           </div>
         </div>
       </section>
@@ -367,15 +406,26 @@ export default function KomunitasLanding() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-        <div className="rounded-2xl border border-stone-200/80 bg-white p-8 sm:p-10">
+        <div className="relative rounded-2xl border border-stone-200/80 bg-white p-8 sm:p-10">
+          <div className="pointer-events-none absolute -top-5 right-8 hidden -rotate-3 sm:block">
+            <div className="relative h-24 w-32 overflow-hidden rounded-md border-4 border-white shadow-md ring-1 ring-stone-200">
+              <Image
+                src="/images/landing/board-4425993.jpg"
+                alt=""
+                fill
+                sizes="128px"
+                className="object-cover [filter:sepia(.2)_saturate(1.1)]"
+              />
+            </div>
+          </div>
           <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center">
             <div>
               <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
                 Don't take our word for it.
               </h2>
               <p className="mt-2 max-w-lg text-stone-600">
-                The contract is live on Stellar mainnet. Read every contribution, proposal, vote,
-                and release directly from the chain.
+                It's live on Stellar mainnet. Go read every contribution, proposal, vote, and
+                payout straight off the chain yourself.
               </p>
               <a
                 href={EXPLORER_URL}
