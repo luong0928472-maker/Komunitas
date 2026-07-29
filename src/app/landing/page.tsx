@@ -76,7 +76,7 @@ const ECOSYSTEM = [
   {
     icon: Globe,
     title: 'Stellar network',
-    body: 'Where it all settles: mainnet, the same ledger real XLM lives on, not a testnet built for a demo.',
+    body: 'Where it all settles: Stellar mainnet, the same public ledger real XLM lives on.',
   },
   {
     icon: Wallet,
