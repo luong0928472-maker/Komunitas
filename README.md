@@ -50,8 +50,8 @@ Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](h
 - [x] **Public GitHub repository** — link to the public repo
 - [x] **Minimum 20+ meaningful commits** — see commit history on `main`
 - [x] **Live deployed application** — https://komunitas-rho.vercel.app
-- [x] **PPT/Pitch deck link** — _add deck link_
-- [x] **Demo video link** — _add demo link_
+- [x] **PPT/Pitch deck link** — [View Pitch Deck](https://docs.google.com/presentation/d/1JUeopupoPfo-Ajjz19Ds0Z_mI4MpsvBE/edit?usp=sharing)
+- [x] **Demo video link** — [Watch Demo](https://drive.google.com/file/d/1_-c-_Y8QYA-bpzHTOFoVXMFLFNj4XyoU/view?usp=sharing)
 
 ### Proof
 
