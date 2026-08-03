@@ -1,7 +1,7 @@
 import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { proposals } from './proposals';
 
-export const votes = pgTable('votes', {
+export const votes = pgTable('komunitas_votes', {
   id: uuid('id').defaultRandom().primaryKey(),
   proposalId: uuid('proposal_id')
     .notNull()

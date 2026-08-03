@@ -1,7 +1,7 @@
 import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 // A real on-chain contribution into the community treasury.
-export const deposits = pgTable('deposits', {
+export const deposits = pgTable('komunitas_deposits', {
   id: uuid('id').defaultRandom().primaryKey(),
   memberPublicKey: text('member_public_key').notNull(),
   amountStroops: text('amount_stroops').notNull(),

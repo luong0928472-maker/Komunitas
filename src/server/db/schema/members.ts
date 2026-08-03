@@ -1,6 +1,6 @@
 import { integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
-export const members = pgTable('members', {
+export const members = pgTable('komunitas_members', {
   id: uuid('id').defaultRandom().primaryKey(),
   publicKey: text('public_key').notNull().unique(),
   // Total contributed across all assets, normalised to stroops (7 decimals).

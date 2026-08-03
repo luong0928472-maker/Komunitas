@@ -2,9 +2,9 @@ import { pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const PROPOSAL_STATUSES = ['active', 'passed', 'rejected', 'funded'] as const;
 export type ProposalStatus = (typeof PROPOSAL_STATUSES)[number];
-export const proposalStatusEnum = pgEnum('proposal_status', PROPOSAL_STATUSES);
+export const proposalStatusEnum = pgEnum('komunitas_proposal_status', PROPOSAL_STATUSES);
 
-export const proposals = pgTable('proposals', {
+export const proposals = pgTable('komunitas_proposals', {
   id: uuid('id').defaultRandom().primaryKey(),
   title: text('title').notNull(),
   description: text('description').notNull(),
