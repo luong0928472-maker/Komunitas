@@ -65,7 +65,7 @@ Mainnet contract: [`CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR`](h
 
 Submit your GitHub repository link below before the monthly deadline:
 
-**https://github.com/your-org/Komunitas**
+**https://github.com/luong0928472-maker/Komunitas**
 
 <details>
 <summary>Current evidence totals</summary>
