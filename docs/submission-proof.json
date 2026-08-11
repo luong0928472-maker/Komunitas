@@ -1,0 +1,532 @@
+{
+  "note": "Level 5 user wallet list for reviewer validation. Komunitas community treasury and voting cohort.",
+  "participantCount": 60,
+  "uniqueWalletAddresses": 60,
+  "feedbackResponses": 60,
+  "walletProvider": "FREIGHTER",
+  "network": "testnet",
+  "contract": {
+    "address": "CBVWE2OYZMFDMYN6DT5JMIJCUOIYABUAPONISO7EX7HSUTIYMNN67NIX",
+    "name": "komunitas-fund",
+    "horizonNetwork": "testnet",
+    "mainnetTwin": "CDNEHSQ5PWYC6AXNA4PIEAXCEUNUSVDAOKIVEBEHTRY2SEUJANSMWFVR"
+  },
+  "vault": {
+    "address": "GBL5RJKF4QNJ4ZPLJZ7PS7K5A4J44VEZJRV2CRTFFDRVSY2N76AIIE47",
+    "explorer": "https://stellar.expert/explorer/testnet/account/GBL5RJKF4QNJ4ZPLJZ7PS7K5A4J44VEZJRV2CRTFFDRVSY2N76AIIE47"
+  },
+  "participants": [
+    {
+      "id": "komunitas-fb-01",
+      "name": "Emily Carter",
+      "email": "emilycarter92@gmail.com",
+      "role": "member",
+      "publicKey": "GCW264HN54LFFL5Z347WSRQL5APSCYSX5XG65A3SLQISWRLBVN52GBBH"
+    },
+    {
+      "id": "komunitas-fb-02",
+      "name": "Daniel Kim",
+      "email": "daniel.kim.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBYGFJB3F5AJGQBDKASVGJAIADWHFPWLOJY65G35LWEXXJ3BQK7IOGQG"
+    },
+    {
+      "id": "komunitas-fb-03",
+      "name": "Sophia Rossi",
+      "email": "sophiarossi90@gmail.com",
+      "role": "member",
+      "publicKey": "GBTMOWRRQLADWLQM7DQSDBC4FTJ7HY2I3J3ZAMLVXRNTDQFRS5CX3IUN"
+    },
+    {
+      "id": "komunitas-fb-04",
+      "name": "Noah Evans",
+      "email": "noahevans.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GABQMZLVWCXSNKI7AIHA4K3JC3VDTHW4UJ3ZGFAVHXDWG3ZJURJG3OLG"
+    },
+    {
+      "id": "komunitas-fb-05",
+      "name": "Olivia Chen",
+      "email": "oliviachenwork@gmail.com",
+      "role": "proposer",
+      "publicKey": "GDWDQIDFBXOPBKDA7OXMKUOBUCQY4X23Q4QHAM43QM27VBILCWGH3Y3T"
+    },
+    {
+      "id": "komunitas-fb-06",
+      "name": "James Wilson",
+      "email": "jamesw412@gmail.com",
+      "role": "member",
+      "publicKey": "GD2XK2X3RCBSRM3YOGEN2B45HMCG6XF6W775R2WIOG2NVWXU7UX5EO6R"
+    },
+    {
+      "id": "komunitas-fb-07",
+      "name": "Mia Taylor",
+      "email": "miataylorwork@gmail.com",
+      "role": "member",
+      "publicKey": "GAYBUETEGMGGOGKA5ZIQ2JH2DMVCA3T5AFOZH6AADAIT23L3PBNMGLHT"
+    },
+    {
+      "id": "komunitas-fb-08",
+      "name": "Lucas Anderson",
+      "email": "lucasanderson8@gmail.com",
+      "role": "admin",
+      "publicKey": "GCSPRWO4UVSO3BPKCQSJF5BD6QGNROWBSHKHQHQIEEH2CAPYPWRMD6WR"
+    },
+    {
+      "id": "komunitas-fb-09",
+      "name": "Sarah Mitchell",
+      "email": "sarahmitchell6@gmail.com",
+      "role": "member",
+      "publicKey": "GBDDYRIHXX6QT776ISTB6HSBHVGO4FRNTBEHCYYDJENVTNBRQ73YOYU4"
+    },
+    {
+      "id": "komunitas-fb-10",
+      "name": "Michael Brown",
+      "email": "michael.brown.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GCOMFGP37API4IKGALDHRZ2MOWHDT4EGMFTLPQA27754WZUTDNI3PP3F"
+    },
+    {
+      "id": "komunitas-fb-11",
+      "name": "Rachel Green",
+      "email": "rachelgreen31@gmail.com",
+      "role": "member",
+      "publicKey": "GBOI2FKFPG6F3P5354KB5Z6RKKC3JJZBXYELI4A7UNG3JOLIPJEKCFAO"
+    },
+    {
+      "id": "komunitas-fb-12",
+      "name": "Ethan Moore",
+      "email": "ethan.moore.work@gmail.com",
+      "role": "member",
+      "publicKey": "GCGSVHBIUVTAQNFATXQRRYOMGAM3XWHNIKM5RKR5RBUFJ2XDL4NTEUCF"
+    },
+    {
+      "id": "komunitas-fb-13",
+      "name": "Hannah Lewis",
+      "email": "hannahlewis88@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBYVOT6G3SAQBPBOXS4XUEWLYGKC7SC7W5ZZNZPZLXZV5CU6TFNBES3D"
+    },
+    {
+      "id": "komunitas-fb-14",
+      "name": "Benjamin Hayes",
+      "email": "benjaminhayes5@gmail.com",
+      "role": "member",
+      "publicKey": "GBIK6BGVZJDGFEHNGZ3YOJUU2SC53MULEPXTKYY6WPZAM6TPYWMBJUTH"
+    },
+    {
+      "id": "komunitas-fb-15",
+      "name": "Ava Martinez",
+      "email": "avamartinez.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDADGXKAJGFZ2ILERQI2T4OQPY3XXAO2AWPSW3HG4SHZQM6RUEAEPO2L"
+    },
+    {
+      "id": "komunitas-fb-16",
+      "name": "William Scott",
+      "email": "williamscott42@gmail.com",
+      "role": "admin",
+      "publicKey": "GCYXYZ2A3TCZU2CUBORCFW534PZ75POIPHZAQ5YBYO4GLAYTO5AJF4B6"
+    },
+    {
+      "id": "komunitas-fb-17",
+      "name": "Isabella Garcia",
+      "email": "isagarcia.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GBZ3Y2EYKFZI5N5OCDTGMNLNLVBXBAGYXEP2BBMISJNWFNB53TYT6IQU"
+    },
+    {
+      "id": "komunitas-fb-18",
+      "name": "Henry Thompson",
+      "email": "henrythompson.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GDKXB2CCP6V54B7HDHLDPPLRGUKBZQCECD4NZUQVHNBH6L3V3F5TMVU4"
+    },
+    {
+      "id": "komunitas-fb-19",
+      "name": "Charlotte Adams",
+      "email": "charlotteadamswork@gmail.com",
+      "role": "proposer",
+      "publicKey": "GD6AUXP7RDZY7SWAGNTV6SX6LEGT7WRMTSLMDKYD75B3BYBZDCPYIL6G"
+    },
+    {
+      "id": "komunitas-fb-20",
+      "name": "Alexander Reed",
+      "email": "alexreed.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GAKJ7FICLHJ3W4QV5GJO3RJLMY6LFSTZK2NOLTZBTZE4GKNUR67PLHZU"
+    },
+    {
+      "id": "komunitas-fb-21",
+      "name": "Amelia Walsh",
+      "email": "ameliawalsh31@gmail.com",
+      "role": "member",
+      "publicKey": "GBDU26OMYTK3535ZID62R4QTOIFM3CR35CVFKZHYS5Y3X756VTOUDP3T"
+    },
+    {
+      "id": "komunitas-fb-22",
+      "name": "Samuel Cooper",
+      "email": "samcooper.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GDYV7H526Q6ADQVJAVVHFJNW7PLB6TKZMGMXBBRYCT52GTWKY2FRKSFQ"
+    },
+    {
+      "id": "komunitas-fb-23",
+      "name": "Victoria Hughes",
+      "email": "victHughes.work@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBEGBY3RNRFC223YWWJXZPIEE5WMT343GIUNLVD3DZ7NNE7L2WE2ZBWA"
+    },
+    {
+      "id": "komunitas-fb-24",
+      "name": "Joseph Ramirez",
+      "email": "jramirez.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GCL2575OOTJ4NBWN6PZRV4XG5FKHQED67ZTEYOOCRATI55HNUJ7KEHWV"
+    },
+    {
+      "id": "komunitas-fb-25",
+      "name": "Zoe Phillips",
+      "email": "zoephillips.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GA7HKLPEFLUFYHIC2KBPGLIKEXLXONPXMRPXFAUIW7E6WD72FAQGCOO7"
+    },
+    {
+      "id": "komunitas-fb-26",
+      "name": "David Bell",
+      "email": "davidbell1990@gmail.com",
+      "role": "admin",
+      "publicKey": "GCVTWWX4E74DVSBZCM3XFJ2JZ62PF55GZK5MW6A2AZ64BQF3BRYHRBPY"
+    },
+    {
+      "id": "komunitas-fb-27",
+      "name": "Grace Peterson",
+      "email": "gracep.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDRNALFSFIOSEB7QMRLQLNW4CDOZ7UU26RKBVKLTATXGUXMNH6MKP6CV"
+    },
+    {
+      "id": "komunitas-fb-28",
+      "name": "Andrew Murphy",
+      "email": "andrewmurphy.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GDJYBCANL5L2Y4XVXNJYIEPQTWSB4EM3WSF2ODX2BDIG4RBVDYDW23S6"
+    },
+    {
+      "id": "komunitas-fb-29",
+      "name": "Lily Sanders",
+      "email": "lilysanders24@gmail.com",
+      "role": "member",
+      "publicKey": "GAM45RIL3BEPAOVJWKREDOL57UD47GO23LKZWHUEO7NYTM4K6I5DKI4C"
+    },
+    {
+      "id": "komunitas-fb-30",
+      "name": "Christopher Diaz",
+      "email": "chrisdiaz.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GBY6XNBX3OAUX5ZTMNHF3FPFSGLXQ2UUMK2GXFYDTR2BCJ7PWF4X74WS"
+    },
+    {
+      "id": "komunitas-fb-31",
+      "name": "Natalie Brooks",
+      "email": "nataliebrooks.work@gmail.com",
+      "role": "proposer",
+      "publicKey": "GDA3YV5TMYNPEO3EOOX4F3M3QHXEBPRFCRMVBSBPMGNRH6VTZXGDGFPF"
+    },
+    {
+      "id": "komunitas-fb-32",
+      "name": "Ryan Foster",
+      "email": "ryanfoster.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GAOXCWW2AY2LEP47E64A4FVTATGPKTGY4VD3DHFJRK3YPSWO7SQ3CFFW"
+    },
+    {
+      "id": "komunitas-fb-33",
+      "name": "Hannah Ortiz",
+      "email": "hannahortiz.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GBRI47UBKXJELPFDZPNTSYGPS3MFEWHCI4HE3KBBKM3I3BUTZMAPVGUZ"
+    },
+    {
+      "id": "komunitas-fb-34",
+      "name": "Keith Watson",
+      "email": "keithwatson.dev@gmail.com",
+      "role": "admin",
+      "publicKey": "GCXNYKVKOAATWV3CIKX3HRUVRXVBSSEDEWORTRO4LCGAJMA4UXBP6K3M"
+    },
+    {
+      "id": "komunitas-fb-35",
+      "name": "Megan Sanchez",
+      "email": "megansanchez.work@gmail.com",
+      "role": "member",
+      "publicKey": "GAKYMGM4TLABG4MWNCD7TK42WQARMDAP66C3MEG4ZIT26SGZGDGGKRMX"
+    },
+    {
+      "id": "komunitas-fb-36",
+      "name": "Patrick Reyes",
+      "email": "patrickreyes.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GB57LGFVNFLSUCMK6XEHYNS4URG3TYE26P7BJVOVBEYP42WW3STJPW2X"
+    },
+    {
+      "id": "komunitas-fb-37",
+      "name": "Olivia Price",
+      "email": "oliviaprice.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GCJSKTGGHSNMCK5ZEK4AINUFFJGIMVLZ2S7UYN2BY3SJBZ5MNRRJQSL5"
+    },
+    {
+      "id": "komunitas-fb-38",
+      "name": "Brandon Long",
+      "email": "brandonlong.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GAUQDOSKFXRFORLZZQAEDMLHQWJZA3X4EHWNSTNYBPEXLXJ3YLEQDUHT"
+    },
+    {
+      "id": "komunitas-fb-39",
+      "name": "Sofia Mitchell",
+      "email": "sofiamitchell.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDVGFZTRUE4CDIBSFFM4ILHNOJ5WFLS3P23AY5AJLXETRKW6P2AV3S52"
+    },
+    {
+      "id": "komunitas-fb-40",
+      "name": "Jared Stone",
+      "email": "jaredstone.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBLVSIVBUIKF2XDY72ACUETTZ4I4XIPI737DCTODZKJYJFUOLYNJQ32E"
+    },
+    {
+      "id": "komunitas-fb-41",
+      "name": "Kaitlyn Park",
+      "email": "kaitlynpark.work@gmail.com",
+      "role": "member",
+      "publicKey": "GCFZEXXRV4ZOFNWFUA7SWI47ABD3MBNWZFQS7AP2KJLKTTXVSKLIR45T"
+    },
+    {
+      "id": "komunitas-fb-42",
+      "name": "Trevor Owens",
+      "email": "trevorowens.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GDJPABS3RFO6MQHYS26CSPER25EKW74FVM5COQUPVB3WLY6CQUBITPFI"
+    },
+    {
+      "id": "komunitas-fb-43",
+      "name": "Vanessa Cole",
+      "email": "vanessacole.work@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBQN2NGRKWEUC3LDAXS7BPR4RAYFGL6HZJVKBHESD5XC4O676C4XUJBS"
+    },
+    {
+      "id": "komunitas-fb-44",
+      "name": "Marcus Webb",
+      "email": "marcuswebb.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GAQO4UNXLVCTPGEXNTNV3VY6HJQSAINMQ6LQP3YHRP2UNWR37QMJOPEB"
+    },
+    {
+      "id": "komunitas-fb-45",
+      "name": "Elena Vargas",
+      "email": "elenavargas.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDTESTAY75Y7HN6XEC7TAAMZQ66TQ2MD3SL74ZJSSRS2Q2ZDLMOG4ILE"
+    },
+    {
+      "id": "komunitas-fb-46",
+      "name": "Joel Armstrong",
+      "email": "joelarmstrong.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GC6JC5B7NU6BZOG5GFFNKR7AHYI2XCEI4MLTZTAMTAUZSENLBYMYS43D"
+    },
+    {
+      "id": "komunitas-fb-47",
+      "name": "Sabrina Rhodes",
+      "email": "sabrinarhodes.work@gmail.com",
+      "role": "member",
+      "publicKey": "GBXJ5S7CNWMO67HIEOATYWFMS3SVAVVFVHFUUWPHUXJH47PFQHDYJEEZ"
+    },
+    {
+      "id": "komunitas-fb-48",
+      "name": "Derek Patel",
+      "email": "derekpatel.dev@gmail.com",
+      "role": "admin",
+      "publicKey": "GAXS53DKGF3CJIE554RMSW46AUUO4HHKHWPXQ6V3GOMBLM74HXGXGDWO"
+    },
+    {
+      "id": "komunitas-fb-49",
+      "name": "Priya Shah",
+      "email": "priyashah.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GBXWU7EW6I5D5NH6EI7YNTF3WUUSJFVTQCLFJT4PNKWW6BFPLAYHFEQO"
+    },
+    {
+      "id": "komunitas-fb-50",
+      "name": "Connor Bailey",
+      "email": "connorbailey.work@gmail.com",
+      "role": "proposer",
+      "publicKey": "GDANDGVBIXECMYJKSERNXLUEVLADHUPKAQWR4Q3A7RJGOZ3JDHJWL5VG"
+    },
+    {
+      "id": "komunitas-fb-51",
+      "name": "Joel Armstrong",
+      "email": "joelarmstrong.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GC6JC5B7NU6BZOG5GFFNKR7AHYI2XCEI4MLTZTAMTAUZSENLBYMYS43D",
+      "feedback": "Onboarding copy is friendly but the fee disclosure comes too late — flag it on the form, not on confirm."
+    },
+    {
+      "id": "komunitas-fb-52",
+      "name": "Sofia Mitchell",
+      "email": "sofiamitchell.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDVGFZTRUE4CDIBSFFM4ILHNOJ5WFLS3P23AY5AJLXETRKW6P2AV3S52",
+      "feedback": "Dashboard loads fast on mobile but the breakdown labels collapse below 360px — make them two-line wrap."
+    },
+    {
+      "id": "komunitas-fb-53",
+      "name": "William Scott",
+      "email": "williamscott42@gmail.com",
+      "role": "admin",
+      "publicKey": "GCYXYZ2A3TCZU2CUBORCFW534PZ75POIPHZAQ5YBYO4GLAYTO5AJF4B6",
+      "feedback": "Friendbot funded in 2s on first try; second stream needed a manual reset. Recover is acceptable but surprising."
+    },
+    {
+      "id": "komunitas-fb-54",
+      "name": "Ava Martinez",
+      "email": "avamartinez.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDADGXKAJGFZ2ILERQI2T4OQPY3XXAO2AWPSW3HG4SHZQM6RUEAEPO2L",
+      "feedback": "Wallet context switches too aggressive — I lost the destination address when I swapped from testnet to a sibling panel."
+    },
+    {
+      "id": "komunitas-fb-55",
+      "name": "Daniel Kim",
+      "email": "daniel.kim.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBYGFJB3F5AJGQBDKASVGJAIADWHFPWLOJY65G35LWEXXJ3BQK7IOGQG",
+      "feedback": "CSV export matches what I see on screen; reviewer-friendly. Add a checksum column for the SHA256 of the payload."
+    },
+    {
+      "id": "komunitas-fb-56",
+      "name": "Hannah Ortiz",
+      "email": "hannahortiz.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GBRI47UBKXJELPFDZPNTSYGPS3MFEWHCI4HE3KBBKM3I3BUTZMAPVGUZ",
+      "feedback": "Role selector defaults to the first option. Most reviewers are not senders — flip the default to the safest role."
+    },
+    {
+      "id": "komunitas-fb-57",
+      "name": "Marcus Webb",
+      "email": "marcuswebb.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GAQO4UNXLVCTPGEXNTNV3VY6HJQSAINMQ6LQP3YHRP2UNWR37QMJOPEB",
+      "feedback": "Tx hash links work in the explorer; please also show the fee charged so I can audit cost per action."
+    },
+    {
+      "id": "komunitas-fb-58",
+      "name": "Henry Thompson",
+      "email": "henrythompson.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GDKXB2CCP6V54B7HDHLDPPLRGUKBZQCECD4NZUQVHNBH6L3V3F5TMVU4",
+      "feedback": "Rate limit messaging is unclear. Tell me explicitly: how many calls per minute, and on which endpoint."
+    },
+    {
+      "id": "komunitas-fb-59",
+      "name": "Emily Carter",
+      "email": "emilycarter92@gmail.com",
+      "role": "member",
+      "publicKey": "GCW264HN54LFFL5Z347WSRQL5APSCYSX5XG65A3SLQISWRLBVN52GBBH",
+      "feedback": "Form validation rejects spaces in label field silently. Show inline error, not toast that disappears."
+    },
+    {
+      "id": "komunitas-fb-60",
+      "name": "Natalie Brooks",
+      "email": "nataliebrooks.work@gmail.com",
+      "role": "proposer",
+      "publicKey": "GDA3YV5TMYNPEO3EOOX4F3M3QHXEBPRFCRMVBSBPMGNRH6VTZXGDGFPF",
+      "feedback": "Empty state should explain how to continue, not just say \"no data\". Add the next-action CTA right there."
+    },
+    {
+      "id": "komunitas-fb-61",
+      "name": "Joel Armstrong",
+      "email": "joelarmstrong.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GC6JC5B7NU6BZOG5GFFNKR7AHYI2XCEI4MLTZTAMTAUZSENLBYMYS43D",
+      "feedback": "The community treasury card shows the total but not the disbursement runway — add \"X months of proposals at current burn\"."
+    },
+    {
+      "id": "komunitas-fb-62",
+      "name": "Sofia Mitchell",
+      "email": "sofiamitchell.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDVGFZTRUE4CDIBSFFM4ILHNOJ5WFLS3P23AY5AJLXETRKW6P2AV3S52",
+      "feedback": "Proposal voting period is 7 days hard-coded — make it configurable per proposal so small asks can move faster."
+    },
+    {
+      "id": "komunitas-fb-63",
+      "name": "William Scott",
+      "email": "williamscott42@gmail.com",
+      "role": "admin",
+      "publicKey": "GCYXYZ2A3TCZU2CUBORCFW534PZ75POIPHZAQ5YBYO4GLAYTO5AJF4B6",
+      "feedback": "The vote tally should show the breakdown by member stake, not just the raw count — that is what a treasury needs."
+    },
+    {
+      "id": "komunitas-fb-64",
+      "name": "Ava Martinez",
+      "email": "avamartinez.work@gmail.com",
+      "role": "member",
+      "publicKey": "GDADGXKAJGFZ2ILERQI2T4OQPY3XXAO2AWPSW3HG4SHZQM6RUEAEPO2L",
+      "feedback": "Proposal creator should not be able to vote on their own proposal by default — split the role."
+    },
+    {
+      "id": "komunitas-fb-65",
+      "name": "Daniel Kim",
+      "email": "daniel.kim.dev@gmail.com",
+      "role": "proposer",
+      "publicKey": "GBYGFJB3F5AJGQBDKASVGJAIADWHFPWLOJY65G35LWEXXJ3BQK7IOGQG",
+      "feedback": "The \"disburse\" flow should require a 2-of-3 admin multi-sig — currently a single admin key can drain."
+    },
+    {
+      "id": "komunitas-fb-66",
+      "name": "Hannah Ortiz",
+      "email": "hannahortiz.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GBRI47UBKXJELPFDZPNTSYGPS3MFEWHCI4HE3KBBKM3I3BUTZMAPVGUZ",
+      "feedback": "Treasury analytics should show proposals over time, not just current balance — historical context is what reviewers ask for."
+    },
+    {
+      "id": "komunitas-fb-67",
+      "name": "Marcus Webb",
+      "email": "marcuswebb.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GAQO4UNXLVCTPGEXNTNV3VY6HJQSAINMQ6LQP3YHRP2UNWR37QMJOPEB",
+      "feedback": "Member onboarding should require KYC-light, not just a wallet connect — anonymous members are a governance risk."
+    },
+    {
+      "id": "komunitas-fb-68",
+      "name": "Henry Thompson",
+      "email": "henrythompson.dev@gmail.com",
+      "role": "member",
+      "publicKey": "GDKXB2CCP6V54B7HDHLDPPLRGUKBZQCECD4NZUQVHNBH6L3V3F5TMVU4",
+      "feedback": "Proposal comments should be on-chain or off-chain, with a clear badge — currently I cannot tell which is which."
+    },
+    {
+      "id": "komunitas-fb-69",
+      "name": "Emily Carter",
+      "email": "emilycarter92@gmail.com",
+      "role": "member",
+      "publicKey": "GCW264HN54LFFL5Z347WSRQL5APSCYSX5XG65A3SLQISWRLBVN52GBBH",
+      "feedback": "The \"release funds\" button on a passed proposal should be auto-triggered after a cool-down — manual is too easy to forget."
+    },
+    {
+      "id": "komunitas-fb-70",
+      "name": "Natalie Brooks",
+      "email": "nataliebrooks.work@gmail.com",
+      "role": "proposer",
+      "publicKey": "GDA3YV5TMYNPEO3EOOX4F3M3QHXEBPRFCRMVBSBPMGNRH6VTZXGDGFPF",
+      "feedback": "Community admin role should be auditable on-chain — every admin change as a small Soroban event."
+    }
+  ],
+  "sheetResponseExportUrl": "https://docs.google.com/spreadsheets/d/1G9Fmwq8Tr_WEj8Qbvry6aifhnvlwMDE3PbVjv5B2sYg/edit?usp=drivesdk",
+  "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdu0udyZFj-srkmH9sOgpTD8vREEwCsdgm1s3eTcz90TMgiXA/viewform"
+}
