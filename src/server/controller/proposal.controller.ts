@@ -5,7 +5,6 @@ import { ok, created } from '@/server/lib/http';
 import { proposalService } from '@/server/service/proposal.service';
 import { fundService } from '@/server/service/fund.service';
 import type { RouteContext } from '@/server/middleware/compose';
-import type { ProposalStatus } from '@/server/db/schema/proposals';
 import { AppError } from '@/server/lib/http';
 
 const stroopsSchema = z
@@ -35,9 +34,17 @@ const submitCreateSchema = z.object({
 const prepareVoteSchema = z.object({ inFavor: z.boolean() });
 const submitVoteSchema = z.object({ signedXdr: z.string().min(1), inFavor: z.boolean() });
 
+const listProposalsQuerySchema = z.object({
+  status: z.enum(['active', 'passed', 'rejected', 'funded']).optional(),
+  cursor: z.string().min(1).optional(),
+  pageSize: z.coerce.number().int().positive().max(50).optional(),
+});
+
 export async function listProposals(req: NextRequest) {
-  const status = new URL(req.url).searchParams.get('status') as ProposalStatus | null;
-  return ok(await proposalService.list(status ?? undefined));
+  const params = listProposalsQuerySchema.parse(
+    Object.fromEntries(new URL(req.url).searchParams),
+  );
+  return ok(await proposalService.list(params));
 }
 
 /** Phase 1: build the unsigned create_proposal invocation. */
