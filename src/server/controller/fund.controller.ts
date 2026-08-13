@@ -13,6 +13,15 @@ const submitSchema = z.object({
 });
 const trustlineSubmitSchema = z.object({ signedXdr: z.string().min(1) });
 
+const membersQuerySchema = z.object({
+  cursor: z.string().min(1).optional(),
+  pageSize: z.coerce.number().int().positive().max(200).optional(),
+});
+
+const depositsQuerySchema = z.object({
+  limit: z.coerce.number().int().positive().max(100).optional(),
+});
+
 export async function prepareContributionHandler(req: NextRequest, ctx: RouteContext) {
   const body = prepareSchema.parse(await req.json());
   const out = await fundService.prepareContribution(ctx.publicKey!, body.amountStroops);
@@ -40,10 +49,12 @@ export async function getPoolHandler(_req: NextRequest) {
   return ok(await fundService.getPool());
 }
 
-export async function getMembersHandler(_req: NextRequest) {
-  return ok(await fundService.getMembers());
+export async function getMembersHandler(req: NextRequest) {
+  const params = membersQuerySchema.parse(Object.fromEntries(new URL(req.url).searchParams));
+  return ok(await fundService.getMembers(params));
 }
 
-export async function getDepositsHandler(_req: NextRequest) {
-  return ok(await fundService.getRecentDeposits(20));
+export async function getDepositsHandler(req: NextRequest) {
+  const params = depositsQuerySchema.parse(Object.fromEntries(new URL(req.url).searchParams));
+  return ok(await fundService.getRecentDeposits(params.limit));
 }

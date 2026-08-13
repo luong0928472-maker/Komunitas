@@ -1,4 +1,4 @@
-import { desc, eq, sql } from 'drizzle-orm';
+import { and, desc, eq, gt, lt, or, sql } from 'drizzle-orm';
 import {
   type Asset,
   BASE_FEE,
@@ -26,6 +26,37 @@ const MIN_STROOPS = 1_000_000n; // 0.1 XLM
 
 function addBig(a: string, b: string): string {
   return (BigInt(a) + BigInt(b)).toString();
+}
+
+const MEMBERS_DEFAULT_PAGE_SIZE = 50;
+const MEMBERS_MAX_PAGE_SIZE = 200;
+
+export interface MemberCursor {
+  contributedStroops: string;
+  joinedAt: Date;
+  publicKey: string;
+}
+
+export function encodeMemberCursor(row: MemberCursor): string {
+  return Buffer.from(
+    `${row.contributedStroops}|${row.joinedAt.toISOString()}|${row.publicKey}`,
+    'utf8',
+  ).toString('base64url');
+}
+
+export function decodeMemberCursor(cursor: string): MemberCursor | undefined {
+  let decoded: string;
+  try {
+    decoded = Buffer.from(cursor, 'base64url').toString('utf8');
+  } catch {
+    return undefined;
+  }
+  const [contributedStroops, joinedAtRaw, publicKey] = decoded.split('|');
+  if (!contributedStroops || !joinedAtRaw || !publicKey) return undefined;
+  if (!/^-?\d+$/.test(contributedStroops)) return undefined;
+  const joinedAt = new Date(joinedAtRaw);
+  if (Number.isNaN(joinedAt.getTime())) return undefined;
+  return { contributedStroops, joinedAt, publicKey };
 }
 
 export const fundService = {
@@ -185,12 +216,45 @@ export const fundService = {
     return fundService.getOrCreatePool();
   },
 
-  async getMembers() {
-    return db.select().from(members).orderBy(desc(members.contributedStroops));
+  async getMembers(options: { cursor?: string; pageSize?: number } = {}) {
+    const pageSize = Math.min(
+      options.pageSize ?? MEMBERS_DEFAULT_PAGE_SIZE,
+      MEMBERS_MAX_PAGE_SIZE,
+    );
+    const decodedCursor = options.cursor ? decodeMemberCursor(options.cursor) : undefined;
+    const conditions = [];
+    if (decodedCursor) {
+      conditions.push(
+        or(
+          lt(members.contributedStroops, decodedCursor.contributedStroops),
+          and(
+            eq(members.contributedStroops, decodedCursor.contributedStroops),
+            gt(members.joinedAt, decodedCursor.joinedAt),
+          ),
+          and(
+            eq(members.contributedStroops, decodedCursor.contributedStroops),
+            eq(members.joinedAt, decodedCursor.joinedAt),
+            gt(members.publicKey, decodedCursor.publicKey),
+          ),
+        ),
+      );
+    }
+    const rows = await db
+      .select()
+      .from(members)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(members.contributedStroops), members.joinedAt, members.publicKey)
+      .limit(pageSize + 1);
+    const hasMore = rows.length > pageSize;
+    const items = hasMore ? rows.slice(0, pageSize) : rows;
+    const lastItem = items[items.length - 1];
+    const nextCursor = hasMore && lastItem ? encodeMemberCursor(lastItem) : null;
+    return { items, nextCursor };
   },
 
-  async getRecentDeposits(limit = 20) {
-    return db.select().from(deposits).orderBy(desc(deposits.createdAt)).limit(limit);
+  async getRecentDeposits(limit?: number) {
+    const capped = Math.min(limit ?? 20, 100);
+    return db.select().from(deposits).orderBy(desc(deposits.createdAt)).limit(capped);
   },
 
   async getMemberByKey(publicKey: string) {
