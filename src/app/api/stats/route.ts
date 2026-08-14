@@ -37,7 +37,13 @@ export async function GET(_req: NextRequest) {
       .select({ n: sql<number>`count(*)::int` })
       .from(votes)
       .where(notExcluded(votes.voterPublicKey));
-    const proposalRows = await db.select({ status: proposals.status }).from(proposals);
+    const proposalAgg = await db
+      .select({
+        total: sql<number>`count(*)::int`,
+        funded: sql<number>`count(*) filter (where ${proposals.status} = 'funded')::int`,
+        active: sql<number>`count(*) filter (where ${proposals.status} = 'active')::int`,
+      })
+      .from(proposals);
     const pool = await db.select().from(fundPool).limit(1);
 
     const totalContributedStroops =
@@ -56,9 +62,9 @@ export async function GET(_req: NextRequest) {
       members: memberCount[0]?.n ?? 0,
       contributions: contributionAgg[0]?.n ?? 0,
       votes: voteCount[0]?.n ?? 0,
-      proposals: proposalRows.length,
-      fundedProposals: proposalRows.filter((p) => p.status === 'funded').length,
-      activeProposals: proposalRows.filter((p) => p.status === 'active').length,
+      proposals: proposalAgg[0]?.total ?? 0,
+      fundedProposals: proposalAgg[0]?.funded ?? 0,
+      activeProposals: proposalAgg[0]?.active ?? 0,
       totalContributedStroops,
       totalReleasedStroops: totalReleasedStr,
     });
