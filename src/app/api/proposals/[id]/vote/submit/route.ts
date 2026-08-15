@@ -3,10 +3,11 @@ import { submitVote } from '@/server/controller/proposal.controller';
 import { fromError } from '@/server/lib/http';
 import { compose } from '@/server/middleware/compose';
 import { withAuth } from '@/server/middleware/withAuth';
+import { rateLimit } from '@/server/middleware/rateLimit';
 
 export const maxDuration = 60;
 
-const handler = compose(withAuth)(async (req, ctx) => submitVote(req, ctx));
+const handler = compose(rateLimit({ key: 'proposal.vote.submit', capacity: 30, refillPerMinute: 30 }), withAuth)(async (req, ctx) => submitVote(req, ctx));
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
